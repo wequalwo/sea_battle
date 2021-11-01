@@ -5,25 +5,40 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Главный класс, отвечающий за прорисовку полей, кнопок, добавления панелей
+ */
+
 class Field extends JFrame implements ActionListener
 {
-	private static int width = 1500;
-	private static int height = 800;
-
+	private static final int width = 1500;
+	private static final int height = 800;
 	public static int field_size = 50;//коэффициент размера поля
-	private static int panel_position_x = 10; //положение начальной панели
-	private static int panel_position_y = 100;// -//-
-	private static int button_long = 100;// -//-
-	private static int button_height = 50;// -//-
+	private static final int panel_position_x = 10; //положение начальной панели
+	private static final int panel_position_y = 100;// -//-
+	private static final int button_long = 100;// -//-
+	private static final int button_height = 50;// -//-
 	public static int space = 30; //расстоянием между панельями
 
-	private JButton start_button;
-	My_fleet fleet = new My_fleet();
+	/**
+	 * Кнопка старта игры.
+	 * TODO: Активна тогда и только тогда, когда поле игрока заполнено и заполнено правильно
+	 */
+	private final JButton start_button;
+
+	My_fleet fleet = new My_fleet();//пока бесполезно
+
+	/**
+	 * Панели полей игрока и соперника
+	 */
 	Board my_board;
 	Opponents_board opponents_board;
+
+	/**
+	 * В конструкторе просто инициализируются все поля
+	 */
 	Field()
 	{
-		//observer = new Observer();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(null);
 		this.setSize(width, height);
@@ -44,6 +59,12 @@ class Field extends JFrame implements ActionListener
 		this.add(opponents_board);
 		this.setVisible(true);
 	}
+
+	/**
+	 * Метод работает с кнопкой старта игры
+	 * TODO: реализовать кнопку
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
