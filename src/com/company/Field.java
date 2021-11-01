@@ -4,39 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-class My_board extends JPanel
+class Board extends JPanel
 {
-
-}
-class Field extends JFrame implements ActionListener
-{
-	private static int field_size = 50;
-	private JButton[][] buttons;
-	private JButton start_button;
-	private Observer observer;
-	My_fleet fleet = new My_fleet();
-
-	Field()
+	public JButton[][] buttons;
+	public Observer observer;
+	private static int field_size = Field.field_size;
+	Field my_field;
+	Board(Field my_field)
 	{
+		this.my_field = my_field;
 		observer = new Observer();
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setLayout(null);
+		this.setBackground(Color.black);
+		this.setSize(Field.field_size * 12 + 20, Field.field_size * 12 + 20);
+		this.setLayout(new GridLayout(12, 12, 2, 2));
+		this.setLocation(10, 10);
 		buttons = new JButton[12][12];
-		this.setSize(1500, 800);
-		JPanel panel = new JPanel();
-		JPanel op_panel = new JPanel();
-		JPanel borders = new JPanel();
-		//panel.setBackground(Color.cyan);
-		panel.setBackground(Color.black);
-		op_panel.setBackground(Color.black);
-		panel.setSize(field_size * 12 + 20, field_size * 12 + 20);
-		op_panel.setSize(field_size * 12 + 20, field_size * 12 + 20);
-		panel.setLayout(new GridLayout(12, 12, 2, 2));
-		panel.setLocation(10, 10);
-		op_panel.setLayout(new GridLayout(12, 12, 2, 2));
-		op_panel.setLocation(10, 10);
-
-		this.setResizable(false);
 		int label = 1;
 		char text_label = 'a';
 		for (int i = 0; i < field_size * 12; i += field_size)
@@ -46,8 +28,8 @@ class Field extends JFrame implements ActionListener
 				buttons[i / field_size][j / field_size] = new JButton();
 				buttons[i / field_size][j / field_size].setBackground(Color.blue);
 				buttons[i / field_size][j / field_size].setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				buttons[i / field_size][j / field_size].addActionListener(this);
-				panel.add(buttons[i / field_size][j / field_size]);
+				buttons[i / field_size][j / field_size].addActionListener(my_field);
+				this.add(buttons[i / field_size][j / field_size]);
 				if (i == 0 || j == 0 || i == 11 * field_size || j == 11 * field_size)
 				{
 					buttons[i / field_size][j / field_size].setBackground(Color.black);
@@ -66,19 +48,35 @@ class Field extends JFrame implements ActionListener
 					}
 					buttons[i / field_size][j / field_size].setEnabled(false);
 				}
-
 			}
 		}
+	}
+}
+class Field extends JFrame implements ActionListener
+{
+	public static int field_size = 50;
+	//private JButton[][] buttons;
+	private JButton start_button;
+	//private Observer observer;
+	My_fleet fleet = new My_fleet();
+	Board my_board;
+	Field()
+	{
+		//observer = new Observer();
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLayout(null);
+		this.setSize(1500, 800);
+		this.setResizable(false);
+		my_board = new Board(this);
+		
 		start_button = new JButton("Start");
 		start_button.setBackground(Color.red);
 		start_button.setForeground(Color.white);
 		start_button.setBounds(650, 20, 100, 50);
 		start_button.addActionListener(this);
 		this.add(start_button);
-		panel.setLocation(10, 100);
-		this.add(panel);
-		op_panel.setLocation(750 + 24, 100);
-		this.add(op_panel);
+		my_board.setLocation(10, 100);
+		this.add(my_board);
 		this.setVisible(true);
 	}
 	@Override
@@ -88,20 +86,20 @@ class Field extends JFrame implements ActionListener
 		{
 			for (int j = 1; j < 11; j++)
 			{
-				if (e.getSource() == buttons[i][j])
+				if (e.getSource() == my_board.buttons[i][j])
 				{
-					if (observer.check_sea(i - 1, j - 1) == 0)
+					if (my_board.observer.check_sea(i - 1, j - 1) == 0)
 					{
-						buttons[i][j].setBackground(Color.GREEN);
-					} else if (observer.check_sea(i - 1, j - 1) == 1)
+						my_board.buttons[i][j].setBackground(Color.GREEN);
+					} else if (my_board.observer.check_sea(i - 1, j - 1) == 1)
 					{
-						buttons[i][j].setBackground(Color.blue);
+						my_board.buttons[i][j].setBackground(Color.blue);
 					} else
 					{
-						buttons[i][j].setBackground(Color.red);
+						my_board.buttons[i][j].setBackground(Color.red);
 						return;
 					}
-					observer.invert_point(i - 1, j - 1);
+					my_board.observer.invert_point(i - 1, j - 1);
 				}
 			}
 		}
@@ -121,7 +119,7 @@ class Field extends JFrame implements ActionListener
 		for (int i = 1; i < 11; i++)
 		{
 			for (int j = 1; j < 11; j++)
-				buttons[i][j].setEnabled(false);
+				my_board.buttons[i][j].setEnabled(false);
 		}
 	}
 }
