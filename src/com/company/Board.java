@@ -10,7 +10,6 @@ class Board extends JPanel implements ActionListener
 	private JButton[][] buttons;
 	private Observer observer;
 	private static int field_size = Field.field_size;
-
 	Board()
 	{
 		observer = new Observer();
@@ -85,5 +84,23 @@ class Board extends JPanel implements ActionListener
 			for (int j = 1; j < 11; j++)
 				buttons[i][j].setEnabled(false);
 		}
+	}
+	public void _fix()
+	{
+		for (int i = 1; i < 11; i++)
+		{
+			for (int j = 1; j < 11; j++)
+				buttons[i][j].setEnabled(true);
+		}
+	}
+}
+class Opponents_board extends Board
+{
+	{
+		fix();
+	}
+	void start()
+	{
+		_fix();
 	}
 }

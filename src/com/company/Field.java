@@ -11,6 +11,7 @@ class Field extends JFrame implements ActionListener
 	private JButton start_button;
 	My_fleet fleet = new My_fleet();
 	Board my_board;
+	Opponents_board opponents_board;
 	Field()
 	{
 		//observer = new Observer();
@@ -19,6 +20,7 @@ class Field extends JFrame implements ActionListener
 		this.setSize(1500, 800);
 		this.setResizable(false);
 		my_board = new Board();
+		opponents_board = new Opponents_board();
 
 		start_button = new JButton("Start");
 		start_button.setBackground(Color.red);
@@ -26,8 +28,11 @@ class Field extends JFrame implements ActionListener
 		start_button.setBounds(650, 20, 100, 50);
 		start_button.addActionListener(this);
 		this.add(start_button);
+
 		my_board.setLocation(10, 100);
+		opponents_board.setLocation(725, 100);
 		this.add(my_board);
+		this.add(opponents_board);
 		this.setVisible(true);
 	}
 	@Override
@@ -40,6 +45,7 @@ class Field extends JFrame implements ActionListener
 				return;
 			System.out.println("Started!");
 			my_board.fix();
+			opponents_board._fix();
 			start_button.setBackground(Color.black);
 			start_button.setText("Started");
 			start_button.setEnabled(false);
