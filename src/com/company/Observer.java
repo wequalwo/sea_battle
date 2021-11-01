@@ -15,7 +15,10 @@ class Observer
 			}
 		}
 	}
-
+	public int get_sea(int i, int j)
+	{
+		return sea[i][j];
+	}
 	private boolean lines(int i, int j)
 	{
 		//TODO: проверка на длину и загибания

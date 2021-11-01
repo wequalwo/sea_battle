@@ -26,7 +26,7 @@ class Board extends JPanel implements ActionListener
 			for (int j = 0; j < field_size * 12; j += field_size)
 			{
 				buttons[i / field_size][j / field_size] = new JButton();
-				buttons[i / field_size][j / field_size].setBackground(Color.blue);
+				buttons[i / field_size][j / field_size].setBackground(Color.GRAY);
 				buttons[i / field_size][j / field_size].setCursor(new Cursor(Cursor.WAIT_CURSOR));
 				buttons[i / field_size][j / field_size].addActionListener(this);
 				this.add(buttons[i / field_size][j / field_size]);
@@ -66,7 +66,7 @@ class Board extends JPanel implements ActionListener
 						buttons[i][j].setBackground(Color.GREEN);
 					} else if (observer.check_sea(i - 1, j - 1) == 1)
 					{
-						buttons[i][j].setBackground(Color.blue);
+						buttons[i][j].setBackground(Color.GRAY);
 					} else
 					{
 						buttons[i][j].setBackground(Color.red);
@@ -83,7 +83,11 @@ class Board extends JPanel implements ActionListener
 		for (int i = 1; i < 11; i++)
 		{
 			for (int j = 1; j < 11; j++)
+			{
+				if(observer.get_sea(i - 1, j - 1) == 0)
+					buttons[i][j].setBackground(Color.blue);
 				buttons[i][j].setEnabled(false);
+			}
 		}
 	}
 	public void _fix()
