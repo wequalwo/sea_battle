@@ -7,14 +7,14 @@ import java.awt.event.ActionListener;
 
 class Board extends JPanel implements ActionListener
 {
-	private JButton[][] buttons;
-	private Observer observer;
-	private static int field_size = Field.field_size;
-	private static int square_first = 10;//начальная позиция панели по x и y
+	private final JButton[][] buttons;
+	private final Observer observer;
+	private static final int field_size = Field.field_size;
+	private static final int square_first = 10;//начальная позиция панели по x и y
 
-	private static int r = 0;
-	private static int g = 0;   // цвет кнопки в rgb
-	private static int b = 139;
+	private static final int r = 0;
+	private static final int g = 0;   // цвет кнопки в rgb
+	private static final int b = 139;
 
 	Board()
 	{
@@ -40,8 +40,7 @@ class Board extends JPanel implements ActionListener
 					buttons[i / field_size][j / field_size].setBackground(Color.black);
 					if ((i == 0 && j > 0) && label <= 10)
 					{
-						String s = new String(Integer.toString(label));
-						buttons[i / field_size][j / field_size].setText(s);
+						buttons[i / field_size][j / field_size].setText(Integer.toString(label));
 						label++;
 					}
 					if (j == 0 && i > 0 && text_label <= 'j')
