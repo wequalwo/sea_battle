@@ -11,6 +11,11 @@ class Board extends JPanel implements ActionListener
 	private Observer observer;
 	private static int field_size = Field.field_size;
 	private static int square_first = 10;//начальная позиция панели по x и y
+
+	private static int r = 0;
+	private static int g = 0;   // цвет кнопки в rgb
+	private static int b = 139;
+
 	Board()
 	{
 		observer = new Observer();
@@ -84,8 +89,10 @@ class Board extends JPanel implements ActionListener
 		{
 			for (int j = 1; j < 11; j++)
 			{
+				float[] a = new float[3];
+				Color.RGBtoHSB(r, g, b, a);
 				if(observer.get_sea(i - 1, j - 1) == 0)
-					buttons[i][j].setBackground(Color.blue);
+					buttons[i][j].setBackground(Color.getHSBColor(a[0], a[1],a[2]));
 				buttons[i][j].setEnabled(false);
 			}
 		}
