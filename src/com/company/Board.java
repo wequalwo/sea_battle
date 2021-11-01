@@ -10,13 +10,14 @@ class Board extends JPanel implements ActionListener
 	private JButton[][] buttons;
 	private Observer observer;
 	private static int field_size = Field.field_size;
+	private static int square_first = 10;//начальная позиция панели по x и y
 	Board()
 	{
 		observer = new Observer();
 		this.setBackground(Color.black);
-		this.setSize(Field.field_size * 12 + 20, Field.field_size * 12 + 20);
+		this.setSize(field_size * 12 + Field.space, field_size * 12 + Field.space);
 		this.setLayout(new GridLayout(12, 12, 2, 2));
-		this.setLocation(10, 10);
+		this.setLocation( square_first,  square_first);
 		buttons = new JButton[12][12];
 		int label = 1;
 		char text_label = 'a';
@@ -94,6 +95,7 @@ class Board extends JPanel implements ActionListener
 		}
 	}
 }
+
 class Opponents_board extends Board
 {
 	{
