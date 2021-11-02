@@ -3,13 +3,13 @@ package com.company;
 /**
  * Клсаа Observer хранит поле в виле масства int
  * и отвечает за логику проверки возможности установки корабля на определенное поле
- *
+ * <p>
  * TODO: а также проверяет, собарн ли полный набор кораблей у оппонента
  * TODO: запоняет поля соперника
  */
 class Observer
 {
-	private int[][] sea;	//массив статусов клеток
+	private int[][] sea;    //массив статусов клеток
 
 	Observer()
 	{
@@ -22,10 +22,12 @@ class Observer
 			}
 		}
 	}
+
 	public int get_sea(int i, int j)
 	{
 		return sea[i][j];
 	}
+
 	private boolean lines(int i, int j)
 	{
 		//TODO: проверка на длину и загибания
@@ -34,6 +36,7 @@ class Observer
 
 	/**
 	 * Проверка на воможностть установки части корабля на данную клетку
+	 *
 	 * @param i
 	 * @param j
 	 * @return status
@@ -70,6 +73,7 @@ class Observer
 	 * и статус клетки, если возможно:
 	 * (1) - уже что-то стоит
 	 * (0) - клетка путса
+	 *
 	 * @param i
 	 * @param j
 	 * @return
@@ -84,6 +88,7 @@ class Observer
 
 	/**
 	 * Инвертирует данное поле (устанавливает/снимает метку судна)
+	 *
 	 * @param i
 	 * @param j
 	 */
