@@ -20,18 +20,18 @@ class Board extends JPanel implements ActionListener
 	private static final int square_first = 10;	//начальная позиция панели по x и y
 
 	private static final int r = 0;
-	private static final int g = 0;   			// цвет кнопки в rgb
+	private static final int g = 0;            	// цвет кнопки в rgb
 	private static final int b = 139;
 
 	Board()
 	{
-		observer = new Observer();				//добавление наблюдателя. Нужно для логики программы (см комментарии к класса Observer)
+		observer = new Observer();              //добавление наблюдателя. Нужно для логики программы (см комментарии к класса Observer)
 		this.setBackground(Color.black);
 		this.setSize(field_size * 12 + Field.space, field_size * 12 + Field.space);
 		this.setLayout(new GridLayout(12, 12, 2, 2));
-		this.setLocation( square_first,  square_first);
+		this.setLocation(square_first, square_first);
 		buttons = new JButton[12][12];
-		int label = 1;							//временные переменные для заполнения координат на окоймляющих кнопках
+		int label = 1;                          //временные переменные для заполнения координат на окоймляющих кнопках
 		char text_label = 'a';
 		/*
 		 * Дальнейший цикл инициализирует кнопки поля, причем оставляет окаймление неактивным.
@@ -97,8 +97,7 @@ class Board extends JPanel implements ActionListener
 						 * значит в данной клетке уже стоит что-то. Убираем
 						 */
 						buttons[i][j].setBackground(Color.GRAY);
-					}
-					else
+					} else
 					{
 						/*
 						 * В остальных случаях установка невозможна.
@@ -128,12 +127,13 @@ class Board extends JPanel implements ActionListener
 			{
 				float[] a = new float[3];
 				Color.RGBtoHSB(r, g, b, a);
-				if(observer.get_sea(i - 1, j - 1) == 0)
-					buttons[i][j].setBackground(Color.getHSBColor(a[0], a[1],a[2]));
+				if (observer.get_sea(i - 1, j - 1) == 0)
+					buttons[i][j].setBackground(Color.getHSBColor(a[0], a[1], a[2]));
 				buttons[i][j].setEnabled(false);
 			}
 		}
 	}
+
 	/**
 	 * Метод _fix реалмзует старт игры - все кнопки поля оппонента становятся активными
 	 * ! Используеся только в дочернем классе, реализующем поле оппонента !
@@ -154,6 +154,6 @@ class Board extends JPanel implements ActionListener
 class Opponents_board extends Board
 {
 	{
-		fix();	// в момент инициализации (перед началом игры) поле оппонента должно быть неактивно
+		fix();    // в момент инициализации (перед началом игры) поле оппонента должно быть неактивно
 	}
 }

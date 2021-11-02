@@ -13,13 +13,13 @@ class Field extends JFrame implements ActionListener
 {
 	private static final int width = 1500;
 	private static final int height = 800;
-	public static int field_size = 50;					//коэффициент размера поля
-	private static final int panel_position_x = 10; 	//положение начальной панели
-	private static final int panel_position_y = 100;	// -//-
-	private static final int button_long = 100;			// -//-
-	private static final int button_height = 50;		// -//-
-	private static final int button_space = 20; 		//расстояние от верхней границы окна до кнопки "star" и текста
-	public static int space = 30; 						//расстоянием между панельями
+	public static int field_size = 50;                 //коэффициент размера поля
+	private static final int panel_position_x = 10;    //положение начальной панели
+	private static final int panel_position_y = 100;   // -//-
+	private static final int button_long = 100;        // -//-
+	private static final int button_height = 50;       // -//-
+	private static final int button_space = 20;        //расстояние от верхней границы окна до кнопки "star" и текста
+	public static int space = 30;                      //расстоянием между панельями
 
 	/**
 	 * Кнопка старта игры.
@@ -27,7 +27,7 @@ class Field extends JFrame implements ActionListener
 	 */
 	private final JButton start_button;
 
-	My_fleet fleet = new My_fleet();//пока бесполезно
+	My_fleet fleet = new My_fleet();					//пока бесполезно
 
 	/**
 	 * Панели полей игрока и соперника
@@ -52,36 +52,35 @@ class Field extends JFrame implements ActionListener
 		JPanel upper_panel = new JPanel();
 		upper_panel.setSize(1500, 100);
 		upper_panel.setLocation(0, 0);
-		upper_panel.setLayout(null);				//сбрасываем настроки компоновки панели, чтобы расположить текст и кнопку так, как хотим
-
-		Font text_format = new Font(Font.SERIF, Font.BOLD + Font.ITALIC, 30);			//Заготовили шрифт
+		upper_panel.setLayout(null);    //сбрасываем настроки компоновки панели, чтобы расположить текст и кнопку так, как хотим
+		Font text_format = new Font(Font.SERIF, Font.BOLD + Font.ITALIC, 30);    //Заготовили шрифт
 		//Подпись "Ваш флот":
 		JLabel your_fleet_l = new JLabel("Your fleet");
-		your_fleet_l.setFont(text_format);   													// Установить шрифт в метке
-		your_fleet_l.setForeground(Color.black);      											// Устанавливаем цвет текста в метке
+		your_fleet_l.setFont(text_format);                                                // Установить шрифт в метке
+		your_fleet_l.setForeground(Color.black);                                          // Устанавливаем цвет текста в метке
 		your_fleet_l.setBounds(250, button_space, 500, button_height);
 		upper_panel.add(your_fleet_l);
 		//Подпись "Флот оппонента":
 		JLabel your_op_fleet_l = new JLabel("Your opponent's fleet");
-		your_op_fleet_l.setFont(text_format);   												// Установить шрифт в метке
-		your_op_fleet_l.setForeground(Color.black);      										// Устанавливаем цвет текста в метке
+		your_op_fleet_l.setFont(text_format);                                            // Установить шрифт в метке
+		your_op_fleet_l.setForeground(Color.black);                                      // Устанавливаем цвет текста в метке
 		your_op_fleet_l.setBounds(950, button_space, 500, button_height);
 		upper_panel.add(your_op_fleet_l);
 		//Кнопка начала игры:
 		start_button = new JButton("Start");
 
-		start_button.setFont(new Font(Font.SERIF, Font.BOLD + Font.ITALIC, 20));		//Шрифт такой же, как и раньше, но совсем другой
+		start_button.setFont(new Font(Font.SERIF, Font.BOLD + Font.ITALIC, 20));//Шрифт такой же, как и раньше, но совсем другой
 		start_button.setBackground(Color.red);
 		start_button.setForeground(Color.white);
-		start_button.setBounds(field_size*12 + 2*space, button_space, button_long, button_height);
+		start_button.setBounds(field_size * 12 + 2 * space, button_space, button_long, button_height);
 		start_button.addActionListener(this);
-		upper_panel.add(start_button);															//добавляем кнопку в панель
+		upper_panel.add(start_button);                                                     //добавляем кнопку в панель
 
-		this.add(upper_panel);																	//добавляем панель в фрейм
+		this.add(upper_panel);                                                             //добавляем панель в фрейм
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		my_board.setLocation(panel_position_x, panel_position_y);
-		opponents_board.setLocation(field_size*12 + 2*space + button_long + space, panel_position_y);
+		opponents_board.setLocation(field_size * 12 + 2 * space + button_long + space, panel_position_y);
 		this.add(my_board);
 		this.add(opponents_board);
 		this.setVisible(true);
@@ -90,6 +89,7 @@ class Field extends JFrame implements ActionListener
 	/**
 	 * Метод работает с кнопкой старта игры
 	 * TODO: реализовать кнопку
+	 *
 	 * @param e
 	 */
 	@Override
