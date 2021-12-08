@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Класс Board отвечает за поле игрока
@@ -14,15 +15,15 @@ class Board extends JPanel implements ActionListener
 	 * Массив кнопок buttons - это клетки поля. Их 12, а не 10, потому что красоты ради
 	 * было выполнено окаймление из неактивных кнопок с координатной сеткой
 	 */
-	private final JButton[][] buttons;
-	private final Observer observer;
+	protected final JButton[][] buttons;
+	protected final Observer observer;
 	private static final int field_size = Field.field_size;
 	private static final int square_first = 10;	//начальная позиция панели по x и y
 
 	private static final int r = 0;
 	private static final int g = 0;            	// цвет кнопки в rgb
 	private static final int b = 139;
-
+	boolean start = false;
 	Board()
 	{
 		observer = new Observer();              //добавление наблюдателя. Нужно для логики программы (см комментарии к класса Observer)
@@ -68,7 +69,6 @@ class Board extends JPanel implements ActionListener
 			}
 		}
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
@@ -112,12 +112,13 @@ class Board extends JPanel implements ActionListener
 					 */
 					observer.invert_point(i - 1, j - 1);
 				}
+
 			}
 		}
 	}
-
 	/**
-	 * Метод fix реалмзует старт игры - все кнопки нашего поля становятся неактивными
+	 * Метод fix реализует старт игры - все кнопки нашего поля становятся неактивными
+	 * TODO: помимо неактивных кнопок запускает игру (очередность + оппонента)
 	 */
 	public void fix()
 	{
@@ -133,6 +134,16 @@ class Board extends JPanel implements ActionListener
 			}
 		}
 	}
+}
+
+/**
+ * Класс Opponents_board реализует графику и логику поля оппонента
+ */
+class Opponents_board extends Board
+{
+	{
+		fix();    // в момент инициализации (перед началом игры) поле оппонента должно быть неактивно
+	}
 
 	/**
 	 * Метод _fix реалмзует старт игры - все кнопки поля оппонента становятся активными
@@ -146,14 +157,35 @@ class Board extends JPanel implements ActionListener
 				buttons[i][j].setEnabled(true);
 		}
 	}
-}
 
-/**
- * Класс Opponents_board реализует графику и логику поля оппонента
- */
-class Opponents_board extends Board
-{
+	@Override
+	public void actionPerformed(ActionEvent e)
 	{
-		fix();    // в момент инициализации (перед началом игры) поле оппонента должно быть неактивно
+		for (int i = 1; i < 11; i++)
+		{
+			for (int j = 1; j < 11; j++)
+			{
+				if (e.getSource() == buttons[i][j])
+				{
+					ArrayList<int[]> grind = observer.shot(i - 1, j - 1);
+
+					if (grind.get(0)[0] == def.MISS) // выстрел мимо
+					{
+						buttons[i][j].setBackground(Color.blue);
+					} else if (grind.get(0)[0] == def.HIT)// попал
+					{
+						buttons[i][j].setBackground(Color.orange);
+						buttons[i][j].setEnabled(false);
+					} else // ответ (выстрел) убил
+					{
+						for(int[] p: grind)
+						{
+							buttons[p[0]][p[1]].setBackground(Color.gray);
+							buttons[p[0]][p[1]].setEnabled(false);
+						}
+					}
+				}
+			}
+		}
 	}
 }

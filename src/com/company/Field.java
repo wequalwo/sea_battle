@@ -18,7 +18,7 @@ class Field extends JFrame implements ActionListener
 	private static final int panel_position_y = 100;   // -//-
 	private static final int button_long = 100;        // -//-
 	private static final int button_height = 50;       // -//-
-	private static final int button_space = 20;        //расстояние от верхней границы окна до кнопки "star" и текста
+	private static final int button_space = 20;        //расстояние от верхней границы окна до кнопки "start" и текста
 	public static int space = 30;                      //расстоянием между панельями
 
 	/**
@@ -27,7 +27,7 @@ class Field extends JFrame implements ActionListener
 	 */
 	private final JButton start_button;
 
-	My_fleet fleet = new My_fleet();					//пока бесполезно
+	//My_fleet fleet = new My_fleet();					//пока бесполезно
 
 	/**
 	 * Панели полей игрока и соперника
@@ -46,7 +46,6 @@ class Field extends JFrame implements ActionListener
 		this.setResizable(false);
 		my_board = new Board();
 		opponents_board = new Opponents_board();
-
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Верхняя панель с кнопкой старта и подписями игроков
 		JPanel upper_panel = new JPanel();
@@ -89,24 +88,20 @@ class Field extends JFrame implements ActionListener
 	/**
 	 * Метод работает с кнопкой старта игры
 	 * TODO: реализовать кнопку
-	 *
-	 * @param e
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-
 		if (e.getSource() == start_button)
 		{
-			if (!fleet.full_flag)
-				return;
 			System.out.println("Started!");
 			my_board.fix();
 			opponents_board._fix();
 			start_button.setBackground(Color.black);
 			start_button.setText("Started");
 			start_button.setEnabled(false);
+			my_board.start = true;
+			opponents_board.start = true;
 		}
 	}
-
 }
