@@ -16,7 +16,7 @@ class Board extends JPanel implements ActionListener
 	 * было выполнено окаймление из неактивных кнопок с координатной сеткой
 	 */
 	protected final JButton[][] buttons;
-	protected final Observer observer;
+	protected Observer observer;
 	private static final int field_size = Field.field_size;
 	private static final int square_first = 10;	//начальная позиция панели по x и y
 
@@ -26,7 +26,7 @@ class Board extends JPanel implements ActionListener
 	boolean start = false;
 	Board()
 	{
-		observer = new Observer();              //добавление наблюдателя. Нужно для логики программы (см комментарии к класса Observer)
+		add_observer();
 		this.setBackground(Color.black);
 		this.setSize(field_size * 12 + Field.space, field_size * 12 + Field.space);
 		this.setLayout(new GridLayout(12, 12, 2, 2));
@@ -69,6 +69,11 @@ class Board extends JPanel implements ActionListener
 			}
 		}
 	}
+	protected void add_observer()
+	{
+		observer = new Observer();              //добавление наблюдателя. Нужно для логики программы (см комментарии к класса Observer)
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
@@ -144,7 +149,11 @@ class Opponents_board extends Board
 	{
 		fix();    // в момент инициализации (перед началом игры) поле оппонента должно быть неактивно
 	}
-
+	@Override
+	public void add_observer()
+	{
+		observer = new Op_observer();
+	}
 	/**
 	 * Метод _fix реалмзует старт игры - все кнопки поля оппонента становятся активными
 	 * ! Используеся только в дочернем классе, реализующем поле оппонента !

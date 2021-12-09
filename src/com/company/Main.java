@@ -8,7 +8,7 @@ class def
 	public static int DEAD = -1;
 	public static int ALIVE = 1;
 	public static int SUNKEN = 1;
-
+	public static int EDGE = 10;
 	public static int CHANGE = 1;  //передача хода
 	public static int NO_CHANGE = 0; // ход остается
 

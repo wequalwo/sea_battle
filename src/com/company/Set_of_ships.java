@@ -5,8 +5,10 @@ public class Set_of_ships
 {
 	final private int[][] ships_map;
 	final private ArrayList<Ship> ships;
+	private int counter;
 	Set_of_ships()
 	{
+		counter = 0;
 		ships = new ArrayList<>();
 		for(int i = 0; i < 4; i++)
 		{
@@ -29,6 +31,10 @@ public class Set_of_ships
 						{0, 0, 0,  0,  6,  0,  4, 0, 0, 0},
 						{0, 0, 0,  0,  6,  0,  0, 0, 0, 0}
 				};
+	}
+	public void started()
+	{
+		counter = 10;
 	}
 	//TODO: не забыть добавить, когда будет написан класс судьи
 	private int check_neighbors(int i, int j)

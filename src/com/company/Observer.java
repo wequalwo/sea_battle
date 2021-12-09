@@ -96,3 +96,7 @@ public class Observer
 		return set.shot(i, j);
 	}
 }
+class Op_observer extends Observer
+{
+
+}
