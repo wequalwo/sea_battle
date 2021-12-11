@@ -63,10 +63,7 @@ class My_observer extends Observer
 		}
 		if (i - 1 >= 0 && j - 1 >= 0)
 		{
-			if (sea[i - 1][j - 1] == 1)
-			{
-				return false;
-			}
+			return sea[i - 1][j - 1] != 1;
 		}
 		return true;
 	}
