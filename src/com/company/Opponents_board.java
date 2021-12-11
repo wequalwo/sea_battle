@@ -76,7 +76,12 @@ public class Opponents_board extends Board
 					if (grind.get(0)[0] == MISS) // выстрел мимо
 					{
 						buttons[i][j].setBackground(Color.blue);
-					} else if (grind.get(0)[0] == HIT)// попал
+						int[] pos = opponent.force_move();
+						while (opponent.save(pos, field.hit(pos)))
+						{
+							pos = opponent.force_move();
+						}
+					} else if (grind.get(0)[0] == SUNKEN)// попал
 					{
 						buttons[i][j].setBackground(Color.orange);
 						buttons[i][j].setEnabled(false);
@@ -88,7 +93,6 @@ public class Opponents_board extends Board
 							buttons[p[0]][p[1]].setEnabled(false);
 						}
 					}
-					field.hit(opponent.force_move());
 				}
 			}
 		}

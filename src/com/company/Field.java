@@ -101,8 +101,8 @@ class Field extends JFrame implements ActionListener, def
 			opponents_board.set_start();
 		}
 	}
-	public void hit(int[] pos)
+	public int hit(int[] pos)
 	{
-		my_board.hit(pos);
+		return my_board.hit(pos);
 	}
 }

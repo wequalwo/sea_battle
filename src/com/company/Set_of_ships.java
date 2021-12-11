@@ -85,7 +85,7 @@ public class Set_of_ships implements def
 		// ->TODO: адекватное убийство
 		if(ships.get(ships_map[i][j] - 1).wound() == SUNKEN)
 		{
-			cord.add(new int[]{HIT, HIT});
+			cord.add(new int[]{SUNKEN, SUNKEN});
 			return cord;
 		}
 		int number = ships_map[i][j];
