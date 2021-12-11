@@ -9,27 +9,30 @@ import java.util.ArrayList;
 /**
  * Класс Board отвечает за поле игрока
  */
-class Board extends JPanel implements ActionListener
+class Board extends JPanel implements ActionListener, def
 {
 	/**
 	 * Массив кнопок buttons - это клетки поля. Их 12, а не 10, потому что красоты ради
 	 * было выполнено окаймление из неактивных кнопок с координатной сеткой
 	 */
 	protected final JButton[][] buttons;
-	protected Observer observer;
-	private static final int field_size = Field.field_size;
-	private static final int square_first = 10;	//начальная позиция панели по x и y
-
-	private static final int r = 0;
-	private static final int g = 0;            	// цвет кнопки в rgb
-	private static final int b = 139;
+	protected final Observer observer;
 	boolean start = false;
+
+	protected boolean get_status()
+	{
+		return def.MINE;
+	}
 	Board()
 	{
-		add_observer();
+
+		observer = new Observer(get_status());              //добавление наблюдателя. Нужно для логики программы (см комментарии к класса Observer)
 		this.setBackground(Color.black);
+		int field_size = Field.field_size;
 		this.setSize(field_size * 12 + Field.space, field_size * 12 + Field.space);
 		this.setLayout(new GridLayout(12, 12, 2, 2));
+		//начальная позиция панели по x и y
+		int square_first = 10;
 		this.setLocation(square_first, square_first);
 		buttons = new JButton[12][12];
 		int label = 1;                          //временные переменные для заполнения координат на окоймляющих кнопках
@@ -68,10 +71,6 @@ class Board extends JPanel implements ActionListener
 				}
 			}
 		}
-	}
-	protected void add_observer()
-	{
-		observer = new Observer();              //добавление наблюдателя. Нужно для логики программы (см комментарии к класса Observer)
 	}
 
 	@Override
@@ -132,6 +131,10 @@ class Board extends JPanel implements ActionListener
 			for (int j = 1; j < 11; j++)
 			{
 				float[] a = new float[3];
+				int r = 0;
+				// цвет кнопки в rgb
+				int g = 0;
+				int b = 139;
 				Color.RGBtoHSB(r, g, b, a);
 				if (observer.get_sea(i - 1, j - 1) == 0)
 					buttons[i][j].setBackground(Color.getHSBColor(a[0], a[1], a[2]));
@@ -144,15 +147,16 @@ class Board extends JPanel implements ActionListener
 /**
  * Класс Opponents_board реализует графику и логику поля оппонента
  */
-class Opponents_board extends Board
+class Opponents_board extends Board implements def
 {
+
+	@Override
+	protected boolean get_status()
+	{
+		return OPP;
+	}
 	{
 		fix();    // в момент инициализации (перед началом игры) поле оппонента должно быть неактивно
-	}
-	@Override
-	public void add_observer()
-	{
-		observer = new Op_observer();
 	}
 	/**
 	 * Метод _fix реалмзует старт игры - все кнопки поля оппонента становятся активными
@@ -166,7 +170,10 @@ class Opponents_board extends Board
 				buttons[i][j].setEnabled(true);
 		}
 	}
+	private void op_move()
+	{
 
+	}
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
@@ -176,12 +183,20 @@ class Opponents_board extends Board
 			{
 				if (e.getSource() == buttons[i][j])
 				{
-					ArrayList<int[]> grind = observer.shot(i - 1, j - 1);
+					ArrayList<int[]> grind = null;
+					try
+					{
+						grind = observer.shot(i - 1, j - 1);
+					} catch (Exception exception)
+					{
+						exception.printStackTrace();
+						System.out.println("Error 1: my set of ships collapsed");
+					}
 
-					if (grind.get(0)[0] == def.MISS) // выстрел мимо
+					if (grind.get(0)[0] == MISS) // выстрел мимо
 					{
 						buttons[i][j].setBackground(Color.blue);
-					} else if (grind.get(0)[0] == def.HIT)// попал
+					} else if (grind.get(0)[0] == HIT)// попал
 					{
 						buttons[i][j].setBackground(Color.orange);
 						buttons[i][j].setEnabled(false);
@@ -193,6 +208,7 @@ class Opponents_board extends Board
 							buttons[p[0]][p[1]].setEnabled(false);
 						}
 					}
+					op_move();
 				}
 			}
 		}

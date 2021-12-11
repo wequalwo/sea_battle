@@ -13,10 +13,10 @@ public class Observer
 {
 	final private int[][] sea;    //массив статусов клеток
 	final private Set_of_ships set;
-	Observer()
+	Observer(boolean whose)
 	{
 		sea = new int[10][10];
-		set = new Set_of_ships();
+		set = new Set_of_ships(whose);
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
@@ -25,13 +25,14 @@ public class Observer
 			}
 		}
 	}
-
-
 	public int get_sea(int i, int j)
 	{
 		return sea[i][j];
 	}
-
+	public int[][] get_sea()
+	{
+		return sea;
+	}
 /*	private boolean lines(int i, int j)
 	{
 		//TODO: проверка на длину и загибания
@@ -65,11 +66,12 @@ public class Observer
 				return false;
 			}
 		}
-/*		if (!lines(i, j))
-			return false;*/
+		return double_check(i, j);
+	}
+	protected boolean double_check(int k, int l)
+	{
 		return true;
 	}
-
 	/**
 	 * Метод check_sea возвращает -1, если в принятую клетку установить часть судна невозможно
 	 * и статус клетки, если возможно:
@@ -78,11 +80,12 @@ public class Observer
 	 */
 	public int check_sea(int i, int j)
 	{
+		if(sea[i][j] == 1)
+			return 1;
 		if (!is_legal(i, j))
 			return -1;
-		return sea[i][j];
+		return 0;
 	}
-
 	/**
 	 * Инвертирует данное поле (устанавливает/снимает метку судна)
 	 */
@@ -91,12 +94,8 @@ public class Observer
 		sea[i][j] = Math.abs(Math.abs(sea[i][j]) - 1);
 	}
 
-	ArrayList<int[]> shot(int i, int j)
+	ArrayList<int[]> shot(int i, int j) throws Exception
 	{
 		return set.shot(i, j);
 	}
-}
-class Op_observer extends Observer
-{
-
 }

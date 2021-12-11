@@ -1,12 +1,12 @@
 package com.company;
 import java.util.ArrayList;
 
-public class Set_of_ships
+public class Set_of_ships implements def
 {
-	final private int[][] ships_map;
+	private int[][] ships_map;
 	final private ArrayList<Ship> ships;
 	private int counter;
-	Set_of_ships()
+	Set_of_ships(boolean whose)
 	{
 		counter = 0;
 		ships = new ArrayList<>();
@@ -17,23 +17,42 @@ public class Set_of_ships
 				ships.add(new Ship(i + 1));
 			}
 		}
-		//TODO: заполнение массива ships_map
-		ships_map = new int[][]
-				{
-						{0, 0, 0, 10, 10, 10, 10, 0, 0, 0},
-						{0, 0, 0,  0,  0,  0,  0, 0, 0, 0},
-						{1, 0, 8,  8,  8,  0,  0, 0, 0, 0},
-						{0, 0, 0,  0,  0,  0,  0, 0, 0, 0},
-						{0, 0, 5,  5,  0,  9,  0, 7, 7, 0},
-						{2, 0, 0,  0,  0,  9,  0, 0, 0, 0},
-						{0, 0, 0,  0,  0,  9,  0, 0, 0, 0},
-						{3, 0, 0,  0,  0,  0,  0, 0, 0, 0},
-						{0, 0, 0,  0,  6,  0,  4, 0, 0, 0},
-						{0, 0, 0,  0,  6,  0,  0, 0, 0, 0}
-				};
+		if(whose == MINE)
+		{
+			ships_map = new int[][]
+					{
+							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+					};
+		}
+		else
+		{
+			generate();
+		}
 	}
-	public void started()
+	private void generate() //генерация поля соперника (TODO: сделсть рандомное заполнение)
 	{
+		ships_map =
+				new int[][]{
+						{0, 0, 0, 10, 10, 10, 10, 0, 0, 0},
+						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+						{1, 0, 8, 8, 8, 0, 0, 0, 0, 0},
+						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+						{0, 0, 5, 5, 0, 9, 0, 7, 7, 0},
+						{2, 0, 0, 0, 0, 9, 0, 0, 0, 0},
+						{0, 0, 0, 0, 0, 9, 0, 0, 0, 0},
+						{3, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+						{0, 0, 0, 0, 6, 0, 4, 0, 0, 0},
+						{0, 0, 0, 0, 6, 0, 0, 0, 0, 0}
+				};
 		counter = 10;
 	}
 	//TODO: не забыть добавить, когда будет написан класс судьи
@@ -44,23 +63,27 @@ public class Set_of_ships
 			for(int o = Math.max(j - 1, 0); o <= Math.min(j + 1, 9); o++)
 			{
 				if(ships_map[p][o] == -1)
-					return def.NO_CHANGE;
+					return NO_CHANGE;
 			}
 		}
-		return def.CHANGE;
+		return CHANGE;
 	}
-	protected ArrayList<int[]> shot(int i, int j)
+	protected ArrayList<int[]> shot(int i, int j) throws Exception
 	{
+		if(counter < 10)
+		{
+			System.out.println("ERRROOOORRRRRRRR");
+		}
 		ArrayList<int[]> cord = new ArrayList<>();
 		if(ships_map[i][j] == 0)
 		{
-			cord.add(new int[]{def.MISS, def.MISS});
+			cord.add(new int[]{MISS, MISS});
 			return cord;
 		}
 		// ->TODO: адекватное убийство
-		if(ships.get(ships_map[i][j] - 1).wound() == def.ALIVE)
+		if(ships.get(ships_map[i][j] - 1).wound() == ALIVE)
 		{
-			cord.add(new int[]{def.HIT, def.HIT});
+			cord.add(new int[]{HIT, HIT});
 			return cord;
 		}
 		int number = ships_map[i][j];
@@ -70,8 +93,8 @@ public class Set_of_ships
 			{
 				if(ships_map[p][o] == number)
 				{
-					cord.add(new int[]{p + def.DELTA, o + def.DELTA});
-					ships_map[p][o] = def.SUNKEN;
+					cord.add(new int[]{p + DELTA, o + DELTA});
+					ships_map[p][o] = SUNKEN;
 				}
 			}
 		}
@@ -80,7 +103,7 @@ public class Set_of_ships
 	}
 }
 
-class Ship
+class Ship implements def
 {
 	private int health;
 	Ship(int size)
@@ -92,8 +115,8 @@ class Ship
 		health--;
 		if(health == 0)
 		{
-			return def.DEAD;
+			return DEAD;
 		}
-		return def.ALIVE;
+		return ALIVE;
 	}
 }
