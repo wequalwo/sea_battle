@@ -11,6 +11,7 @@ public class My_observer extends Observer
 		//TODO: проверка на длину и загибания
 		return true;
 	}*/
+
 	/**
 	 * Проверка на воможностть установки части корабля на данную клетку
 	 */
@@ -37,6 +38,7 @@ public class My_observer extends Observer
 		}
 		return true;
 	}
+
 	/**
 	 * Метод check_sea возвращает -1, если в принятую клетку установить часть судна невозможно
 	 * и статус клетки, если возможно:
@@ -45,12 +47,13 @@ public class My_observer extends Observer
 	 */
 	public int check_sea(int i, int j)
 	{
-		if(sea[i][j] == 1)
+		if (sea[i][j] == 1)
 			return 1;
 		if (!is_legal(i, j))
 			return -1;
 		return 0;
 	}
+
 	/**
 	 * Инвертирует данное поле (устанавливает/снимает метку судна)
 	 */

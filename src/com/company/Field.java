@@ -30,6 +30,7 @@ class Field extends JFrame implements ActionListener, def
 	 */
 	My_board my_board;
 	Opponents_board opponents_board;
+
 	/**
 	 * В конструкторе просто инициализируются все поля
 	 */
@@ -39,8 +40,8 @@ class Field extends JFrame implements ActionListener, def
 		this.setLayout(null);
 		this.setSize(FIELD_WIGHT, FIELD_HEIGHT);
 		this.setResizable(false);
-		my_board = new My_board(this);
-		opponents_board = new Opponents_board(this);
+		my_board = new My_board();
+		opponents_board = new Opponents_board();
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Верхняя панель с кнопкой старта и подписями игроков
 		JPanel upper_panel = new JPanel();
@@ -78,12 +79,14 @@ class Field extends JFrame implements ActionListener, def
 		this.add(opponents_board);
 		this.setVisible(true);
 	}
+
 	private void disable_start_button()
 	{
 		start_button.setBackground(Color.black);
 		start_button.setText("Started");
 		start_button.setEnabled(false);
 	}
+
 	/**
 	 * Метод работает с кнопкой старта игры
 	 * TODO: реализовать кнопку
@@ -97,10 +100,11 @@ class Field extends JFrame implements ActionListener, def
 
 			disable_start_button();
 
-			my_board.set_start();
-			opponents_board.set_start();
+			my_board.set_start(this);
+			opponents_board.set_start(this);
 		}
 	}
+
 	public int hit(int[] pos)
 	{
 		return my_board.hit(pos);

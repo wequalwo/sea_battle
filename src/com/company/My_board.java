@@ -1,4 +1,5 @@
 package com.company;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -10,23 +11,23 @@ public class My_board extends Board
 {
 	private My_observer observer;
 
-	My_board(Field field)
+	@Override
+	protected boolean get_status()
 	{
-		super(field);
+		return MINE;
 	}
 
-	@Override
-	protected boolean get_status() { return MINE; }
 	@Override
 	protected void create_obs()
 	{
 		observer = new My_observer(get_status());
 	}
+
 	/**
 	 * Метод fix реалмзует старт игры - все кнопки поля игрока становятся неактивными
 	 */
 	@Override
-	public void fix()
+	public void fix(Field field)
 	{
 		for (int i = 1; i < 11; i++)
 		{
@@ -44,6 +45,7 @@ public class My_board extends Board
 			}
 		}
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
@@ -91,15 +93,15 @@ public class My_board extends Board
 			}
 		}
 	}
+
 	public int hit(int[] pos)
 	{
-		if(observer.get_sea(pos[0], pos[1]) == 1)
+		if (observer.get_sea(pos[0], pos[1]) == 1)
 		{
 			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.ORANGE);
 			// TODO: проверка на убийство, проверка на убитый корабль, прверка на конец игры
 			return SUNKEN;
-		}
-		else
+		} else
 		{
 			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.cyan);
 			return MISS;

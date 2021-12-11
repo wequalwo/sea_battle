@@ -15,12 +15,9 @@ abstract public class Board extends JPanel implements ActionListener, def
 	 */
 	protected JButton[][] buttons;
 	private boolean start; // статус начала игры
-	public Opponent opponent;
-	protected Field field; //для передачи хода
-	// TODO: подумать, как можно это сделать лучше.
-	Board(Field field)
+
+	Board()
 	{
-		this.field = field;
 		start = false;
 		create_obs();  //добавление наблюдателя. Нужно для логики программы (см комментарии к класса Observer)
 		this.setBackground(Color.black);
@@ -69,12 +66,21 @@ abstract public class Board extends JPanel implements ActionListener, def
 			}
 		}
 	}
+
 	abstract protected boolean get_status();
+
 	abstract protected void create_obs();
-	abstract public void fix();
-	public void set_start()
+
+	abstract public void fix(Field field);
+
+	public void set_start(Field field)
 	{
 		start = true;
-		fix();
+		fix(field);
+	}
+
+	public boolean get_start()
+	{
+		return start;
 	}
 }

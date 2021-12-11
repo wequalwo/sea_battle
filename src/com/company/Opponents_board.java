@@ -1,4 +1,5 @@
 package com.company;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -8,32 +9,29 @@ import java.util.ArrayList;
  */
 public class Opponents_board extends Board
 {
+
 	private Op_observer observer;
 	private Opponent opponent;
 
-	{
-		opponent = new Opponent();
-	}
-	Opponents_board(Field field)
-	{
-		super(field);
-	}
 	@Override
 	protected boolean get_status()
 	{
 		return OPP;
 	}
+
 	@Override
 	protected void create_obs()
 	{
 		observer = new Op_observer(get_status());
 	}
+
 	/**
 	 * Метод fix реалмзует старт игры - все кнопки поля оппонентна становятся активными
 	 */
 	@Override
-	public void fix()
+	public void fix(Field field)
 	{
+		opponent = new Opponent(field);
 		for (int i = 1; i < 11; i++)
 		{
 			for (int j = 1; j < 11; j++)
@@ -50,6 +48,8 @@ public class Opponents_board extends Board
 			}
 		}
 	}
+
+	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
@@ -68,7 +68,7 @@ public class Opponents_board extends Board
 						exception.printStackTrace();
 						System.out.println("Error 1: my set of ships collapsed");
 					}
-					if(grind == null)
+					if (grind == null)
 					{
 						throw new NullPointerException();
 					}
@@ -76,11 +76,7 @@ public class Opponents_board extends Board
 					if (grind.get(0)[0] == MISS) // выстрел мимо
 					{
 						buttons[i][j].setBackground(Color.blue);
-						int[] pos = opponent.force_move();
-						while (opponent.save(pos, field.hit(pos)))
-						{
-							pos = opponent.force_move();
-						}
+						while (opponent.force_move() != MISS) ; // до тех пор, пока соперник не промазал, он ходит
 					} else if (grind.get(0)[0] == SUNKEN)// попал
 					{
 						buttons[i][j].setBackground(Color.orange);

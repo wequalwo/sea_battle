@@ -1,4 +1,5 @@
 package com.company;
+
 /**
  * Класс Observer хранит поле в виле масства int
  * и отвечает за логику проверки возможности установки корабля на определенное поле
@@ -8,8 +9,9 @@ package com.company;
  */
 abstract public class Observer implements def
 {
-	protected int[][] sea;    		// массив статусов клеток для визуализации кораблей
-	protected Set_of_ships set;		// набор кораблей
+	protected int[][] sea;            // массив статусов клеток для визуализации кораблей
+	protected Set_of_ships set;        // набор кораблей
+
 	Observer(boolean whose)
 	{
 		sea = new int[10][10];
@@ -22,6 +24,7 @@ abstract public class Observer implements def
 			}
 		}
 	}
+
 	public int get_sea(int i, int j)
 	{
 		return sea[i][j];
