@@ -1,13 +1,11 @@
 package com.company;
-/**
- * TODO: work work work wolk wolk wolk
- */
 
 import java.util.Random;
 
+//TODO: work work work wolk wolk wolk
 public class Opponent implements def
 {
-	private Field field;
+	private final Field field;
 	private int[] previous_shot;
 	private final Random random;
 	private final int[][] map;
