@@ -1,4 +1,5 @@
 package com.company;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Set_of_ships implements def
@@ -72,8 +73,9 @@ public class Set_of_ships implements def
 	{
 		if(counter < 10)
 		{
-			System.out.println("ERRROOOORRRRRRRR");
+			throw new IOException();
 		}
+
 		ArrayList<int[]> cord = new ArrayList<>();
 		if(ships_map[i][j] == 0)
 		{

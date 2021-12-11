@@ -44,7 +44,7 @@ class Field extends JFrame implements ActionListener
 		this.setLayout(null);
 		this.setSize(width, height);
 		this.setResizable(false);
-		my_board = new Board();
+		my_board = new My_board();
 		opponents_board = new Opponents_board();
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Верхняя панель с кнопкой старта и подписями игроков
@@ -77,7 +77,6 @@ class Field extends JFrame implements ActionListener
 
 		this.add(upper_panel);                                                             //добавляем панель в фрейм
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 		my_board.setLocation(panel_position_x, panel_position_y);
 		opponents_board.setLocation(field_size * 12 + 2 * space + button_long + space, panel_position_y);
 		this.add(my_board);
@@ -96,7 +95,7 @@ class Field extends JFrame implements ActionListener
 		{
 			System.out.println("Started!");
 			my_board.fix();
-			opponents_board._fix();
+			opponents_board.fix();
 			start_button.setBackground(Color.black);
 			start_button.setText("Started");
 			start_button.setEnabled(false);
