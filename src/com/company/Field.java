@@ -9,10 +9,9 @@ import java.awt.event.ActionListener;
  * Главный класс, отвечающий за прорисовку полей, кнопок, добавления панелей
  */
 
-class Field extends JFrame implements ActionListener
+class Field extends JFrame implements ActionListener, def
 {
-	private static final int width = 1500;
-	private static final int height = 800;
+
 	public static int field_size = 50;                 //коэффициент размера поля
 	private static final int panel_position_x = 10;    //положение начальной панели
 	private static final int panel_position_y = 100;   // -//-
@@ -38,14 +37,14 @@ class Field extends JFrame implements ActionListener
 	{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(null);
-		this.setSize(width, height);
+		this.setSize(FIELD_WIGHT, FIELD_HEIGHT);
 		this.setResizable(false);
 		my_board = new My_board();
 		opponents_board = new Opponents_board();
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Верхняя панель с кнопкой старта и подписями игроков
 		JPanel upper_panel = new JPanel();
-		upper_panel.setSize(1500, 100);
+		upper_panel.setSize(FIELD_WIGHT, PANEL_HEIGHT);
 		upper_panel.setLocation(0, 0);
 		upper_panel.setLayout(null);    //сбрасываем настроки компоновки панели, чтобы расположить текст и кнопку так, как хотим
 		Font text_format = new Font(Font.SERIF, Font.BOLD + Font.ITALIC, 30);    //Заготовили шрифт

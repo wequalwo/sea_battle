@@ -1,7 +1,5 @@
 package com.company;
-
 import java.util.ArrayList;
-
 /**
  * Класс Observer хранит поле в виле масства int
  * и отвечает за логику проверки возможности установки корабля на определенное поле
@@ -34,7 +32,7 @@ class My_observer extends Observer
 {
 	My_observer(boolean whose)
 	{
-		super(MINE);
+		super(whose);
 	}
 /*	private boolean lines(int i, int j)
 	{
@@ -86,7 +84,7 @@ class My_observer extends Observer
 	 */
 	public void invert_point(int i, int j)
 	{
-		sea[i][j] = Math.abs(Math.abs(sea[i][j]) - 1);
+		sea[i][j] = Math.abs(Math.abs(sea[i][j]) - DELTA);
 	}
 
 }
@@ -94,7 +92,7 @@ class Op_observer extends Observer
 {
 	Op_observer(boolean whose)
 	{
-		super(OPP);
+		super(whose);
 	}
 	public ArrayList<int[]> shot(int i, int j) throws Exception
 	{

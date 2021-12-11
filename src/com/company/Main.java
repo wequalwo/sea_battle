@@ -2,19 +2,19 @@ package com.company;
 
 interface def
 {
-	int DELTA = 1;
-	int MISS = -1;
-	int HIT = 0;
-	int DEAD = -1;
-	int ALIVE = 1;
-	int SUNKEN = 1;
-	int EDGE = 10;
-	int CHANGE = 1;  //передача хода
-	int NO_CHANGE = 0; // ход остается
-	boolean MINE = false;
-	boolean OPP = true;
-/*	final private static int injured = 2;
-	private static int killed = 3;*/
+	int DELTA = 1;			// смещение массива - считать с нуля, а не с единицы (из-за окаймления поля)
+	int MISS = -1;			// смещение в обраую сторонц
+	int HIT = 0;			// статус - попадание
+	int DEAD = -1;			// статус - судно затопдено
+	int SUNKEN = 1;			// статус - судно тонет
+	int EDGE = 10;			// граница поля
+	int CHANGE = 1;  		//передача хода
+	int NO_CHANGE = 0; 		// ход остается
+	boolean MINE = false;	// принадлежность игроку
+	boolean OPP = true;		// принадлежность противнику
+	int FIELD_WIGHT = 1500;	// длина игрового поля (она же длина панели)
+	int FIELD_HEIGHT = 800; // ширина игрового поля
+	int PANEL_HEIGHT = 100;	// высота панели
 
 }
 
