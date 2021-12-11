@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Opponent
 {
-	Random random;
+	private Random random;
 	Opponent()
 	{
 		random = new Random();
@@ -18,10 +18,6 @@ public class Opponent
 	{
 		int i = random.nextInt(def.EDGE);
 		int j = random.nextInt(def.EDGE);
-
-
-
-
-		return new int[]{i, j};
+		return (new int[]{i, j});
 	}
 }

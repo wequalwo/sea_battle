@@ -9,6 +9,12 @@ import java.awt.event.ActionEvent;
 public class My_board extends Board
 {
 	private My_observer observer;
+
+	My_board(Field field)
+	{
+		super(field);
+	}
+
 	@Override
 	protected boolean get_status() { return MINE; }
 	@Override
@@ -83,6 +89,20 @@ public class My_board extends Board
 				}
 
 			}
+		}
+	}
+	public int hit(int[] pos)
+	{
+		if(observer.get_sea(pos[0], pos[1]) == 1)
+		{
+			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.ORANGE);
+			// TODO: проверка на убийство, проверка на убитый корабль, прверка на конец игры
+			return SUNKEN;
+		}
+		else
+		{
+			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.cyan);
+			return MISS;
 		}
 	}
 }

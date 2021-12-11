@@ -39,8 +39,8 @@ class Field extends JFrame implements ActionListener, def
 		this.setLayout(null);
 		this.setSize(FIELD_WIGHT, FIELD_HEIGHT);
 		this.setResizable(false);
-		my_board = new My_board();
-		opponents_board = new Opponents_board();
+		my_board = new My_board(this);
+		opponents_board = new Opponents_board(this);
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Верхняя панель с кнопкой старта и подписями игроков
 		JPanel upper_panel = new JPanel();
@@ -100,5 +100,9 @@ class Field extends JFrame implements ActionListener, def
 			my_board.set_start();
 			opponents_board.set_start();
 		}
+	}
+	public void hit(int[] pos)
+	{
+		my_board.hit(pos);
 	}
 }

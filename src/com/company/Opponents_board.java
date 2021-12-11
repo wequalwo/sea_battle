@@ -9,6 +9,15 @@ import java.util.ArrayList;
 public class Opponents_board extends Board
 {
 	private Op_observer observer;
+	private Opponent opponent;
+
+	{
+		opponent = new Opponent();
+	}
+	Opponents_board(Field field)
+	{
+		super(field);
+	}
 	@Override
 	protected boolean get_status()
 	{
@@ -40,10 +49,6 @@ public class Opponents_board extends Board
 				buttons[i][j].setEnabled(true);
 			}
 		}
-	}
-	private void op_move()
-	{
-		//TODO
 	}
 	@Override
 	public void actionPerformed(ActionEvent e)
@@ -83,7 +88,7 @@ public class Opponents_board extends Board
 							buttons[p[0]][p[1]].setEnabled(false);
 						}
 					}
-					op_move();
+					field.hit(opponent.force_move());
 				}
 			}
 		}
