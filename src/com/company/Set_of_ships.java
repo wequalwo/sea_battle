@@ -83,7 +83,7 @@ public class Set_of_ships implements def
 			return cord;
 		}
 		// ->TODO: адекватное убийство
-		if(ships.get(ships_map[i][j] - 1).wound() == ALIVE)
+		if(ships.get(ships_map[i][j] - 1).wound() == SUNKEN)
 		{
 			cord.add(new int[]{HIT, HIT});
 			return cord;
@@ -119,6 +119,6 @@ class Ship implements def
 		{
 			return DEAD;
 		}
-		return ALIVE;
+		return SUNKEN;
 	}
 }
