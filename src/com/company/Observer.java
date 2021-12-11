@@ -9,10 +9,10 @@ import java.util.ArrayList;
  * TODO: а также проверяет, собарн ли полный набор кораблей у оппонента
  * TODO: запоняет поля соперника
  */
-abstract public class Observer
+abstract public class Observer implements def
 {
-	protected int[][] sea;    //массив статусов клеток
-	protected Set_of_ships set;
+	protected int[][] sea;    		// массив статусов клеток для визуализации кораблей
+	protected Set_of_ships set;		// набор кораблей
 	Observer(boolean whose)
 	{
 		sea = new int[10][10];
@@ -34,7 +34,7 @@ class My_observer extends Observer
 {
 	My_observer(boolean whose)
 	{
-		super(whose);
+		super(MINE);
 	}
 /*	private boolean lines(int i, int j)
 	{
@@ -94,7 +94,7 @@ class Op_observer extends Observer
 {
 	Op_observer(boolean whose)
 	{
-		super(whose);
+		super(OPP);
 	}
 	public ArrayList<int[]> shot(int i, int j) throws Exception
 	{

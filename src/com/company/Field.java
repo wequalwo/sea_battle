@@ -26,15 +26,11 @@ class Field extends JFrame implements ActionListener
 	 * TODO: Активна тогда и только тогда, когда поле игрока заполнено и заполнено правильно
 	 */
 	private final JButton start_button;
-
-	//My_fleet fleet = new My_fleet();					//пока бесполезно
-
 	/**
 	 * Панели полей игрока и соперника
 	 */
-	Board my_board;
+	My_board my_board;
 	Opponents_board opponents_board;
-
 	/**
 	 * В конструкторе просто инициализируются все поля
 	 */
@@ -73,9 +69,9 @@ class Field extends JFrame implements ActionListener
 		start_button.setForeground(Color.white);
 		start_button.setBounds(field_size * 12 + 2 * space, button_space, button_long, button_height);
 		start_button.addActionListener(this);
-		upper_panel.add(start_button);                                                     //добавляем кнопку в панель
+		upper_panel.add(start_button);       //добавляем кнопку в панель
 
-		this.add(upper_panel);                                                             //добавляем панель в фрейм
+		this.add(upper_panel);               //добавляем панель в фрейм
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		my_board.setLocation(panel_position_x, panel_position_y);
 		opponents_board.setLocation(field_size * 12 + 2 * space + button_long + space, panel_position_y);
@@ -83,7 +79,12 @@ class Field extends JFrame implements ActionListener
 		this.add(opponents_board);
 		this.setVisible(true);
 	}
-
+	private void disable_start_button()
+	{
+		start_button.setBackground(Color.black);
+		start_button.setText("Started");
+		start_button.setEnabled(false);
+	}
 	/**
 	 * Метод работает с кнопкой старта игры
 	 * TODO: реализовать кнопку
@@ -94,13 +95,11 @@ class Field extends JFrame implements ActionListener
 		if (e.getSource() == start_button)
 		{
 			System.out.println("Started!");
-			my_board.fix();
-			opponents_board.fix();
-			start_button.setBackground(Color.black);
-			start_button.setText("Started");
-			start_button.setEnabled(false);
-			my_board.start = true;
-			opponents_board.start = true;
+
+			disable_start_button();
+
+			my_board.set_start();
+			opponents_board.set_start();
 		}
 	}
 }
