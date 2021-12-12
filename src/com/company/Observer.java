@@ -26,7 +26,9 @@ abstract public class Observer implements def
 	}
 	public boolean get_game_status()
 	{
-		return set.get_counter() != 0;
+		if(set.get_counter() == 0)
+			return false;
+		return true;
 	}
 
 	public int get_sea(int i, int j)

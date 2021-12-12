@@ -13,6 +13,7 @@ public class My_board extends Board
 	private My_observer observer;
 	private Field field;
 	public boolean game_status;
+
 	@Override
 	protected boolean get_status()
 	{
@@ -116,16 +117,21 @@ public class My_board extends Board
 		{
 			throw new NullPointerException();
 		}
+		if (!observer.get_game_status())
+		{
+			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.RED);
+			return it_is_the_end;
+		}
+
 		if (grind.get(0)[0] == MISS) // выстрел мимо
 		{
 			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.blue);
 			return MISS;
-		} else if(grind.get(0)[0] == SUNKEN)
+		} else if (grind.get(0)[0] == SUNKEN)
 		{
 			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.ORANGE);
 			return SUNKEN;
-		}
-		else
+		} else
 		{
 			for (int[] p : grind)
 			{
@@ -133,7 +139,7 @@ public class My_board extends Board
 				buttons[p[0]][p[1]].setEnabled(false);
 			}
 		}
-		if(!observer.get_game_status())
+		if (!observer.get_game_status())
 			return it_is_the_end;
 		return DEAD;
 	}

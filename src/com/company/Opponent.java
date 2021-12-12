@@ -32,7 +32,13 @@ public class Opponent implements def
 
 	private int save(int status)
 	{
-		map[previous_shot[0]][previous_shot[1]] = status;
+		if(status == it_is_the_end)
+		{
+			map[previous_shot[0]][previous_shot[1]] = DEAD;
+			status = MISS;
+		}
+		else
+			map[previous_shot[0]][previous_shot[1]] = status;
 		return status;
 	}
 

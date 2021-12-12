@@ -75,10 +75,15 @@ abstract public class Board extends JPanel implements ActionListener, def
 
 	public boolean set_start(Field field)
 	{
-		if(fix(field))
+		if (fix(field))
 			start = true;
 		return start;
 
+	}
+
+	protected void reset()
+	{
+		//TODO: сделать reset
 	}
 
 	public boolean get_start()

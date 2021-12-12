@@ -129,17 +129,21 @@ class Field extends JFrame implements ActionListener, def
 	public int hit(int[] pos)
 	{
 		int rez = my_board.hit(pos);
-		if(rez == it_is_the_end)
+		if (rez == it_is_the_end)
 		{
+			System.out.println("end!");
 			game_status = false;
 			opponents_board.game_status = false;
 			my_board.game_status = false;
 		}
 		return rez;
 	}
+
 	protected void over()
 	{
 		show_info("Game over!");
+		my_board.reset();
+		opponents_board.reset();
 	}
 
 }

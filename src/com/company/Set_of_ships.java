@@ -187,8 +187,9 @@ public class Set_of_ships implements def
 					ships_map[p][o] = DEAD;
 				}
 			}
-			counter--;
 		}
+		counter--;
+		System.out.println("-1");
 		// TODO <-
 		return cord;
 	}

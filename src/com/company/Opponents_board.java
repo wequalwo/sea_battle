@@ -12,6 +12,7 @@ public class Opponents_board extends Board
 	public boolean game_status;
 	private Op_observer observer;
 	private Opponent opponent;
+
 	@Override
 	protected boolean get_status()
 	{
@@ -93,7 +94,7 @@ public class Opponents_board extends Board
 				}
 			}
 		}
-		if(!game_status)
+		if (!game_status)
 		{
 			opponent.force_stop();
 		}
