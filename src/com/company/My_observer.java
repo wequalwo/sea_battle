@@ -19,7 +19,7 @@ public class My_observer extends Observer
 	 */
 	private boolean is_legal(int i, int j)
 	{
-		if (i + 1 < 9 && j + 1 <= 9)
+		if (i + 1 <= 9 && j + 1 <= 9)
 		{
 			if (sea[i + 1][j + 1] == 1)
 				return false;
