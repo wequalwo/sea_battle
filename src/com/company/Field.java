@@ -31,9 +31,18 @@ class Field extends JFrame implements ActionListener, def
 	My_board my_board;
 	Opponents_board opponents_board;
 
-	/**
-	 * В конструкторе просто инициализируются все поля
-	 */
+	static
+	{
+		System.out.println("oops, it's not done yet :(");
+		// TODO: сделать окно ввода данных перед стартом игры
+/*		JFrame start_init = new JFrame();
+		start_init.setSize(500, 500);
+		start_init.setLocation(start_frame_pos_x, start_frame_pos_y);
+		start_init.setVisible(true);
+		show_info("oops, it's not done yet :(");
+		start_init.setVisible(false);*/
+	}
+
 	Field()
 	{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -78,7 +87,7 @@ class Field extends JFrame implements ActionListener, def
 		this.add(my_board);
 		this.add(opponents_board);
 		this.setVisible(true);
-		show_info("Расставьте ваш флот!");
+		show_info("Expand your fleet!");
 	}
 
 	private void disable_start_button()
@@ -99,11 +108,11 @@ class Field extends JFrame implements ActionListener, def
 		{
 			if (!(my_board.set_start(this) && opponents_board.set_start(this)))
 			{
-				show_error("Корабли расположены некорректно!");
+				show_error("The ships are not positioned correctly!");
 				return;
 			}
 			disable_start_button();
-			show_info("Игра началась!");
+			show_info("The game is on!");
 		}
 	}
 
@@ -116,7 +125,6 @@ class Field extends JFrame implements ActionListener, def
 	{
 		JOptionPane.showMessageDialog(null, message, "GS notification", JOptionPane.INFORMATION_MESSAGE);
 	}
-
 
 	public int hit(int[] pos)
 	{
