@@ -33,7 +33,6 @@ public class Opponent implements def
 	private int save(int status)
 	{
 		map[previous_shot[0]][previous_shot[1]] = status;
-		System.out.println(status);
 		return status;
 	}
 

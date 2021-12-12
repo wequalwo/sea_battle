@@ -46,10 +46,7 @@ public class Set_of_ships implements def
 		int[] numbers = new int[]{4, 7, 9, 10};
 		for (int i = 0; i < 10; i++)
 		{
-			for (int j = 0; j < 10; j++)
-			{
-				ships_map[i][j] = sea[i][j];
-			}
+			System.arraycopy(sea[i], 0, ships_map[i], 0, 10);
 		}
 
 		ArrayList<int[]> length = new ArrayList<>();
@@ -126,14 +123,6 @@ public class Set_of_ships implements def
 				return FAIL;
 		}
 
-		for (int i = 0; i < 10; i++)
-		{
-			for (int j = 0; j < 10; j++)
-			{
-				System.out.print(ships_map[i][j] + " ");
-			}
-			System.out.println();
-		}
 		return OK;
 	}
 
