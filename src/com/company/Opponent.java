@@ -32,12 +32,11 @@ public class Opponent implements def
 
 	private int save(int status)
 	{
-		if(status == it_is_the_end)
+		if (status == it_is_the_end)
 		{
 			map[previous_shot[0]][previous_shot[1]] = DEAD;
 			status = MISS;
-		}
-		else
+		} else
 			map[previous_shot[0]][previous_shot[1]] = status;
 		return status;
 	}
@@ -54,9 +53,10 @@ public class Opponent implements def
 		previous_shot = new int[]{i, j};
 		return save(field.hit(previous_shot));
 	}
-	protected void force_stop()
-	{
-		field.over();
-	}
 
+	protected void force_stop(boolean who)
+	{
+
+		field.over(who);
+	}
 }

@@ -139,11 +139,17 @@ class Field extends JFrame implements ActionListener, def
 		return rez;
 	}
 
-	protected void over()
+	protected void over(boolean who)
 	{
-		show_info("Game over!");
+		if(who == YOU)
+		{
+			show_info("Game over. You win!");
+		}
+		else
+		{
+			show_info("Game over. Your opponent win. Try again!");
+		}
 		my_board.reset();
 		opponents_board.reset();
 	}
-
 }

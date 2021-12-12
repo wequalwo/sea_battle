@@ -89,14 +89,19 @@ public class Opponents_board extends Board
 						{
 							buttons[p[0]][p[1]].setBackground(Color.gray);
 							buttons[p[0]][p[1]].setEnabled(false);
+							if(!observer.get_game_status())
+							{
+								game_status = false;
+							}
 						}
+
 					}
 				}
 			}
 		}
 		if (!game_status)
 		{
-			opponent.force_stop();
+			opponent.force_stop(observer.get_counter() == 0);
 		}
 	}
 }

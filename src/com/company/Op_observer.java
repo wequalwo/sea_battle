@@ -12,4 +12,8 @@ public class Op_observer extends Observer
 	{
 		return set.shot(i, j);
 	}
+	public int get_counter()
+	{
+		return set.get_counter();
+	}
 }

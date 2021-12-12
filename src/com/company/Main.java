@@ -23,7 +23,8 @@ interface def
 	int it_is_the_end = -47;
 	boolean FAIL = false;
 	boolean OK = true;
-
+	int SLEEP_TIME = 300;
+	boolean YOU = true;
 }
 
 public class Main

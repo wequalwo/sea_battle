@@ -40,10 +40,12 @@ public class My_observer extends Observer
 		}
 		return true;
 	}
+
 	public boolean create_fleet()
 	{
 		return set.create(sea);
 	}
+
 	/**
 	 * Метод check_sea возвращает -1, если в принятую клетку установить часть судна невозможно
 	 * и статус клетки, если возможно:
@@ -58,10 +60,12 @@ public class My_observer extends Observer
 			return -1;
 		return 0;
 	}
+
 	public ArrayList<int[]> shot(int i, int j) throws Exception
 	{
 		return set.shot(i, j);
 	}
+
 	/**
 	 * Инвертирует данное поле (устанавливает/снимает метку судна)
 	 */
@@ -69,5 +73,4 @@ public class My_observer extends Observer
 	{
 		sea[i][j] = Math.abs(Math.abs(sea[i][j]) - DELTA);
 	}
-
 }

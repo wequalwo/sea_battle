@@ -3,6 +3,9 @@ package com.company;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Класс содержащий всю информацию о расположении судов и их статусах
+ */
 public class Set_of_ships implements def
 {
 	private int[][] ships_map; // так хранить корабли - алоритмически не самое удачное решение, наверное
@@ -41,6 +44,12 @@ public class Set_of_ships implements def
 		}
 	}
 
+	/**
+	 * Метод, создающий массив для игры по массиву статусов клеток
+	 * массив игры содержит не только информацию о положении кораблей, но и ифнормации о порядковом номере суда
+	 * @param sea
+	 * @return
+	 */
 	protected boolean create(int[][] sea)
 	{
 		int[] numbers = new int[]{4, 7, 9, 10};
@@ -75,6 +84,15 @@ public class Set_of_ships implements def
 				}
 			}
 		}
+		if (length.size() != 0)
+		{
+			for (int k = 0; k < length.size(); k++)
+			{
+				ships_map[length.get(k)[0]][length.get(k)[1]] = numbers[length.size() - 1];
+			}
+			numbers[length.size() - 1]--;
+			length.clear();
+		}
 		length.clear();
 		for (int i = 0; i < 10; i++)
 		{
@@ -103,6 +121,15 @@ public class Set_of_ships implements def
 				}
 			}
 		}
+		if (length.size() != 0)
+		{
+			for (int k = 0; k < length.size(); k++)
+			{
+				ships_map[length.get(k)[0]][length.get(k)[1]] = numbers[length.size() - 1];
+			}
+			numbers[length.size() - 1]--;
+			length.clear();
+		}
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
@@ -115,6 +142,14 @@ public class Set_of_ships implements def
 			}
 		}
 
+/*		for(int i = 0; i < 10; i++)
+		{
+			for(int j = 0; j < 10; j++)
+			{
+				System.out.print(ships_map[i][j] + "(" + sea[i][j] + ")" + " ");
+			}
+			System.out.println();
+		}*/
 
 		int[] tmp = new int[]{0, 4, 7, 9};
 		for (int i = 0; i < 4; i++)
@@ -126,6 +161,9 @@ public class Set_of_ships implements def
 		return OK;
 	}
 
+	/**
+	 * генерирует поле автоматически
+	 */
 	private void generate() //генерация поля соперника (TODO: сделсть рандомное заполнение)
 	{
 		ships_map =
@@ -158,6 +196,15 @@ public class Set_of_ships implements def
 		return CHANGE;
 	}
 
+	/**
+	 * Метод, отвечающий за удар по судну
+	 * возвращает ArrayList со статусом в случае попадания или промаха
+	 * или все клетки уничтоженого судна
+	 * @param i
+	 * @param j
+	 * @return
+	 * @throws Exception
+	 */
 	protected ArrayList<int[]> shot(int i, int j) throws Exception
 	{
 		if (counter <= 0)
@@ -200,6 +247,9 @@ public class Set_of_ships implements def
 
 }
 
+/**
+ * класс, отвечаюший за здоровье каждого судна
+ */
 class Ship implements def
 {
 	private int health;
@@ -209,6 +259,10 @@ class Ship implements def
 		health = size;
 	}
 
+	/**
+	 * Метод, непосредственно описывающий ранение
+	 * @return
+	 */
 	protected int wound()
 	{
 		health--;

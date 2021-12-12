@@ -66,7 +66,6 @@ abstract public class Board extends JPanel implements ActionListener, def
 			}
 		}
 	}
-
 	abstract protected boolean get_status();
 
 	abstract protected void create_obs();
