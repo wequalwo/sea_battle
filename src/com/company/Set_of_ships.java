@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Set_of_ships implements def
 {
-	private int[][] ships_map;
+	private int[][] ships_map; // так хранить корабли - алоритмически не самое удачное решение, наверное
 	final private ArrayList<Ship> ships;
 	private int counter;
 
@@ -39,6 +39,102 @@ public class Set_of_ships implements def
 		{
 			generate();
 		}
+	}
+
+	protected boolean create(int[][] sea)
+	{
+		int[] numbers = new int[]{4, 7, 9, 10};
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				ships_map[i][j] = sea[i][j];
+			}
+		}
+
+		ArrayList<int[]> length = new ArrayList<>();
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 1; j < 10; j++)
+			{
+				if (ships_map[i][j - 1] == 1 && ships_map[i][j] == 1)
+				{
+					if (length.size() == 0)
+					{
+						length.add(new int[]{i, j - 1});
+					}
+					length.add(new int[]{i, j});
+				} else
+				{
+					if (length.size() != 0)
+					{
+						for (int k = 0; k < length.size(); k++)
+						{
+							ships_map[length.get(k)[0]][length.get(k)[1]] = numbers[length.size() - 1];
+						}
+						numbers[length.size() - 1]--;
+						length.clear();
+					}
+				}
+			}
+		}
+		length.clear();
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 1; j < 10; j++)
+			{
+				if (ships_map[j - 1][i] == 1 && ships_map[j][i] == 1)
+				{
+					if (length.size() == 0)
+					{
+						length.add(new int[]{j - 1, i});
+					}
+					length.add(new int[]{j, i});
+				} else
+				{
+					if (length.size() > 4)
+						return FAIL;
+					if (length.size() != 0)
+					{
+						for (int k = 0; k < length.size(); k++)
+						{
+							ships_map[length.get(k)[0]][length.get(k)[1]] = numbers[length.size() - 1];
+						}
+						numbers[length.size() - 1]--;
+						length.clear();
+					}
+				}
+			}
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				if (ships_map[i][j] == 1)
+				{
+					ships_map[i][j] = numbers[0];
+					numbers[0]--;
+				}
+			}
+		}
+
+
+		int[] tmp = new int[]{0, 4, 7, 9};
+		for (int i = 0; i < 4; i++)
+		{
+			if (numbers[i] != tmp[i])
+				return FAIL;
+		}
+
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				System.out.print(ships_map[i][j] + " ");
+			}
+			System.out.println();
+		}
+		return OK;
 	}
 
 	private void generate() //генерация поля соперника (TODO: сделсть рандомное заполнение)

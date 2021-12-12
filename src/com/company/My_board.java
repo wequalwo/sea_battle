@@ -27,8 +27,10 @@ public class My_board extends Board
 	 * Метод fix реалмзует старт игры - все кнопки поля игрока становятся неактивными
 	 */
 	@Override
-	public void fix(Field field)
+	public boolean fix(Field field)
 	{
+		if(!observer.create_fleet())
+			return FAIL;
 		for (int i = 1; i < 11; i++)
 		{
 			for (int j = 1; j < 11; j++)
@@ -44,6 +46,7 @@ public class My_board extends Board
 				buttons[i][j].setEnabled(false);
 			}
 		}
+		return OK;
 	}
 
 	@Override
@@ -98,12 +101,14 @@ public class My_board extends Board
 	{
 		if (observer.get_sea(pos[0], pos[1]) == 1)
 		{
-			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.ORANGE);
 			// TODO: проверка на убийство, проверка на убитый корабль, прверка на конец игры
+
+			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.ORANGE);
+
 			return SUNKEN;
 		} else
 		{
-			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.cyan);
+			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.BLUE);
 			return MISS;
 		}
 	}

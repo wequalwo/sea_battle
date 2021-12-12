@@ -71,12 +71,14 @@ abstract public class Board extends JPanel implements ActionListener, def
 
 	abstract protected void create_obs();
 
-	abstract public void fix(Field field);
+	abstract public boolean fix(Field field);
 
-	public void set_start(Field field)
+	public boolean set_start(Field field)
 	{
-		start = true;
-		fix(field);
+		if(fix(field))
+			start = true;
+		return start;
+
 	}
 
 	public boolean get_start()

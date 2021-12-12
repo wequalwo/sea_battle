@@ -78,6 +78,7 @@ class Field extends JFrame implements ActionListener, def
 		this.add(my_board);
 		this.add(opponents_board);
 		this.setVisible(true);
+		show_info("Расставьте ваш флот!");
 	}
 
 	private void disable_start_button()
@@ -96,14 +97,26 @@ class Field extends JFrame implements ActionListener, def
 	{
 		if (e.getSource() == start_button)
 		{
-			System.out.println("Started!");
-
+			if (!(my_board.set_start(this) && opponents_board.set_start(this)))
+			{
+				show_error("Корабли расположены некорректно!");
+				return;
+			}
 			disable_start_button();
-
-			my_board.set_start(this);
-			opponents_board.set_start(this);
+			show_info("Игра началась!");
 		}
 	}
+
+	private void show_error(String message)
+	{
+		JOptionPane.showMessageDialog(null, message, "ER notification", JOptionPane.ERROR_MESSAGE);
+	}
+
+	private void show_info(String message)
+	{
+		JOptionPane.showMessageDialog(null, message, "GS notification", JOptionPane.INFORMATION_MESSAGE);
+	}
+
 
 	public int hit(int[] pos)
 	{

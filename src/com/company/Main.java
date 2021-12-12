@@ -19,6 +19,9 @@ interface def
 	int FIELD_HEIGHT = 800; // ширина игрового поля
 	int PANEL_HEIGHT = 100;	// высота панели
 
+	boolean FAIL = false;
+	boolean OK = true;
+
 }
 
 public class Main

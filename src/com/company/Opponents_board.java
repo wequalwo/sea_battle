@@ -29,7 +29,7 @@ public class Opponents_board extends Board
 	 * Метод fix реалмзует старт игры - все кнопки поля оппонентна становятся активными
 	 */
 	@Override
-	public void fix(Field field)
+	public boolean fix(Field field)
 	{
 		opponent = new Opponent(field);
 		for (int i = 1; i < 11; i++)
@@ -47,6 +47,7 @@ public class Opponents_board extends Board
 				buttons[i][j].setEnabled(true);
 			}
 		}
+		return true;
 	}
 
 	@SuppressWarnings("StatementWithEmptyBody")
