@@ -10,7 +10,7 @@ package com.company;
 abstract public class Observer implements def
 {
 	protected int[][] sea;            // массив статусов клеток для визуализации кораблей
-	protected Set_of_ships set;        // набор кораблей
+	public Set_of_ships set;        // набор кораблей
 
 	Observer(boolean whose)
 	{
@@ -23,6 +23,10 @@ abstract public class Observer implements def
 				sea[i][j] = 0;
 			}
 		}
+	}
+	public boolean get_game_status()
+	{
+		return set.get_counter() != 0;
 	}
 
 	public int get_sea(int i, int j)

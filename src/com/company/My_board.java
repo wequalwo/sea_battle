@@ -2,6 +2,7 @@ package com.company;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 
 /**
@@ -10,7 +11,8 @@ import java.awt.event.ActionEvent;
 public class My_board extends Board
 {
 	private My_observer observer;
-
+	private Field field;
+	public boolean game_status;
 	@Override
 	protected boolean get_status()
 	{
@@ -29,7 +31,8 @@ public class My_board extends Board
 	@Override
 	public boolean fix(Field field)
 	{
-		if(!observer.create_fleet())
+		game_status = field.game_status;
+		if (!observer.create_fleet())
 			return FAIL;
 		for (int i = 1; i < 11; i++)
 		{
@@ -99,17 +102,39 @@ public class My_board extends Board
 
 	public int hit(int[] pos)
 	{
-		if (observer.get_sea(pos[0], pos[1]) == 1)
+		// TODO: проверка на убийство, проверка на убитый корабль, прверка на конец игры
+		ArrayList<int[]> grind = null;
+		try
 		{
-			// TODO: проверка на убийство, проверка на убитый корабль, прверка на конец игры
-
-			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.ORANGE);
-
-			return SUNKEN;
-		} else
+			grind = observer.shot(pos[0], pos[1]);
+		} catch (Exception exception)
 		{
-			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.BLUE);
-			return MISS;
+			exception.printStackTrace();
+			System.out.println("Error 1: my set of ships collapsed");
 		}
+		if (grind == null)
+		{
+			throw new NullPointerException();
+		}
+		if (grind.get(0)[0] == MISS) // выстрел мимо
+		{
+			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.blue);
+			return MISS;
+		} else if(grind.get(0)[0] == SUNKEN)
+		{
+			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.ORANGE);
+			return SUNKEN;
+		}
+		else
+		{
+			for (int[] p : grind)
+			{
+				buttons[p[0]][p[1]].setBackground(Color.gray);
+				buttons[p[0]][p[1]].setEnabled(false);
+			}
+		}
+		if(!observer.get_game_status())
+			return it_is_the_end;
+		return DEAD;
 	}
 }

@@ -20,7 +20,7 @@ interface def
 	int PANEL_HEIGHT = 100;	// высота панели
 	int start_frame_pos_x = 100; // начальные координаты стартового окна
 	int start_frame_pos_y = 100;
-
+	int it_is_the_end = -47;
 	boolean FAIL = false;
 	boolean OK = true;
 

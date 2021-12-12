@@ -19,7 +19,7 @@ class Field extends JFrame implements ActionListener, def
 	private static final int button_height = 50;       // -//-
 	private static final int button_space = 20;        //расстояние от верхней границы окна до кнопки "start" и текста
 	public static int space = 30;                      //расстоянием между панельями
-
+	public boolean game_status = true;
 	/**
 	 * Кнопка старта игры.
 	 * TODO: Активна тогда и только тогда, когда поле игрока заполнено и заполнено правильно
@@ -128,6 +128,18 @@ class Field extends JFrame implements ActionListener, def
 
 	public int hit(int[] pos)
 	{
-		return my_board.hit(pos);
+		int rez = my_board.hit(pos);
+		if(rez == it_is_the_end)
+		{
+			game_status = false;
+			opponents_board.game_status = false;
+			my_board.game_status = false;
+		}
+		return rez;
 	}
+	protected void over()
+	{
+		show_info("Game over!");
+	}
+
 }

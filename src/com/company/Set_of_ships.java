@@ -122,7 +122,7 @@ public class Set_of_ships implements def
 			if (numbers[i] != tmp[i])
 				return FAIL;
 		}
-
+		counter = 10;
 		return OK;
 	}
 
@@ -160,11 +160,10 @@ public class Set_of_ships implements def
 
 	protected ArrayList<int[]> shot(int i, int j) throws Exception
 	{
-		if (counter < 10)
+		if (counter <= 0)
 		{
 			throw new IOException();
 		}
-
 		ArrayList<int[]> cord = new ArrayList<>();
 		if (ships_map[i][j] == 0)
 		{
@@ -185,13 +184,19 @@ public class Set_of_ships implements def
 				if (ships_map[p][o] == number)
 				{
 					cord.add(new int[]{p + DELTA, o + DELTA});
-					ships_map[p][o] = SUNKEN;
+					ships_map[p][o] = DEAD;
 				}
 			}
+			counter--;
 		}
 		// TODO <-
 		return cord;
 	}
+	public int get_counter()
+	{
+		return counter;
+	}
+
 }
 
 class Ship implements def

@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class My_observer extends Observer
 {
 	My_observer(boolean whose)
@@ -56,9 +58,9 @@ public class My_observer extends Observer
 			return -1;
 		return 0;
 	}
-	public void hit_the_ship(int i, int j)
+	public ArrayList<int[]> shot(int i, int j) throws Exception
 	{
-		//TODO: сделать удар по кораблю
+		return set.shot(i, j);
 	}
 	/**
 	 * Инвертирует данное поле (устанавливает/снимает метку судна)

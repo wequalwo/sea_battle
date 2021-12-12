@@ -9,10 +9,9 @@ import java.util.ArrayList;
  */
 public class Opponents_board extends Board
 {
-
+	public boolean game_status;
 	private Op_observer observer;
 	private Opponent opponent;
-
 	@Override
 	protected boolean get_status()
 	{
@@ -31,6 +30,7 @@ public class Opponents_board extends Board
 	@Override
 	public boolean fix(Field field)
 	{
+		game_status = field.game_status;
 		opponent = new Opponent(field);
 		for (int i = 1; i < 11; i++)
 		{
@@ -92,6 +92,10 @@ public class Opponents_board extends Board
 					}
 				}
 			}
+		}
+		if(!game_status)
+		{
+			opponent.force_stop();
 		}
 	}
 }

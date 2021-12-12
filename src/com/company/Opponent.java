@@ -48,4 +48,9 @@ public class Opponent implements def
 		previous_shot = new int[]{i, j};
 		return save(field.hit(previous_shot));
 	}
+	protected void force_stop()
+	{
+		field.over();
+	}
+
 }
