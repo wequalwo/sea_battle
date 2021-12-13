@@ -87,7 +87,9 @@ class Field extends JFrame implements ActionListener, def
 		this.add(my_board);
 		this.add(opponents_board);
 		this.setVisible(true);
-		show_info("Expand your fleet!");
+
+		// раскомментить!!!
+		//show_info("Expand your fleet!");
 	}
 
 	private void disable_start_button()
@@ -112,7 +114,9 @@ class Field extends JFrame implements ActionListener, def
 				return;
 			}
 			disable_start_button();
-			show_info("The game is on!");
+
+			// раскомментить!!!
+			//show_info("The game is on!");
 		}
 	}
 

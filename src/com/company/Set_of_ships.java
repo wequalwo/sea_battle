@@ -158,7 +158,7 @@ public class Set_of_ships implements def
 			if (numbers[i] != tmp[i])
 				return FAIL;
 		}
-		// если все хорошо - ставим число кораблей равным полноме сету и возвращаем OK
+		// если все хорошо - ставим число кораблей равным полному сету и возвращаем OK
 		counter = 10;
 		return OK;
 	}
