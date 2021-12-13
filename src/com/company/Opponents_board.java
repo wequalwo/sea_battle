@@ -78,6 +78,8 @@ public class Opponents_board extends Board
 					if (grind.get(0)[0] == MISS) // выстрел мимо
 					{
 						buttons[i][j].setBackground(Color.blue);
+						// TODO: раскомментировать, когда будет все сделано
+						// buttons[i][j].setEnabled(false);
 						while (opponent.force_move() != MISS) ; // до тех пор, пока соперник не промазал, он ходит
 					} else if (grind.get(0)[0] == SUNKEN)// попал
 					{
@@ -94,7 +96,12 @@ public class Opponents_board extends Board
 								game_status = false;
 							}
 						}
-
+						ArrayList<int[]> off_but = observer.fill(grind);
+						for(int[] p: off_but)
+						{
+							buttons[p[0]][p[1]].setBackground(Color.blue);
+							buttons[p[0]][p[1]].setEnabled(false);
+						}
 					}
 				}
 			}

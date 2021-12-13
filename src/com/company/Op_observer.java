@@ -16,4 +16,8 @@ public class Op_observer extends Observer
 	{
 		return set.get_counter();
 	}
+	public ArrayList<int[]> fill(ArrayList<int[]> corpse)
+	{
+		return set.check_neighbors(corpse);
+	}
 }

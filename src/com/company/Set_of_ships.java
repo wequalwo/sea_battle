@@ -47,8 +47,9 @@ public class Set_of_ships implements def
 	/**
 	 * Метод, создающий массив для игры по массиву статусов клеток
 	 * массив игры содержит не только информацию о положении кораблей, но и ифнормации о порядковом номере суда
-	 * @param sea
-	 * @return
+	 *
+	 * @param sea статусы клеток
+	 * @return Ok или нет
 	 */
 	protected boolean create(int[][] sea)
 	{
@@ -57,7 +58,7 @@ public class Set_of_ships implements def
 		{
 			System.arraycopy(sea[i], 0, ships_map[i], 0, 10);
 		}
-
+		//обработка по строкам
 		ArrayList<int[]> length = new ArrayList<>();
 		for (int i = 0; i < 10; i++)
 		{
@@ -72,6 +73,8 @@ public class Set_of_ships implements def
 					length.add(new int[]{i, j});
 				} else
 				{
+					if (length.size() > 4)
+						return FAIL;
 					if (length.size() != 0)
 					{
 						for (int k = 0; k < length.size(); k++)
@@ -84,6 +87,9 @@ public class Set_of_ships implements def
 				}
 			}
 		}
+		//оработка нижнего правого угла
+		if (length.size() > 4)
+			return FAIL;
 		if (length.size() != 0)
 		{
 			for (int k = 0; k < length.size(); k++)
@@ -93,7 +99,7 @@ public class Set_of_ships implements def
 			numbers[length.size() - 1]--;
 			length.clear();
 		}
-		length.clear();
+
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 1; j < 10; j++)
@@ -121,6 +127,9 @@ public class Set_of_ships implements def
 				}
 			}
 		}
+		//обработка нижнего правого угла
+		if (length.size() > 4)
+			return FAIL;
 		if (length.size() != 0)
 		{
 			for (int k = 0; k < length.size(); k++)
@@ -130,6 +139,7 @@ public class Set_of_ships implements def
 			numbers[length.size() - 1]--;
 			length.clear();
 		}
+		//перенумировка единичных кораблей
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
@@ -141,22 +151,14 @@ public class Set_of_ships implements def
 				}
 			}
 		}
-
-/*		for(int i = 0; i < 10; i++)
-		{
-			for(int j = 0; j < 10; j++)
-			{
-				System.out.print(ships_map[i][j] + "(" + sea[i][j] + ")" + " ");
-			}
-			System.out.println();
-		}*/
-
+		//проверка корректности длин
 		int[] tmp = new int[]{0, 4, 7, 9};
 		for (int i = 0; i < 4; i++)
 		{
 			if (numbers[i] != tmp[i])
 				return FAIL;
 		}
+		// если все хорошо - ставим число кораблей равным полноме сету и возвращаем OK
 		counter = 10;
 		return OK;
 	}
@@ -182,28 +184,64 @@ public class Set_of_ships implements def
 		counter = 10;
 	}
 
-	//TODO: не забыть добавить, когда будет написан класс судьи
-	private int check_neighbors(int i, int j)
+	/**
+	 * @param corpse массив, содержащий клетки затопленного судна
+	 * @return массив клеток окружения
+	 */
+	protected ArrayList<int[]> check_neighbors(ArrayList<int[]> corpse)
 	{
-		for (int p = Math.max(i - 1, 0); p <= Math.min(i + 1, 9); p++)
+		ArrayList<int[]> neighbors = new ArrayList<>();
+		int direction;
+		if (corpse.size() == 1)
 		{
-			for (int o = Math.max(j - 1, 0); o <= Math.min(j + 1, 9); o++)
+			direction = line;
+		} else
+		{
+			if (corpse.get(0)[0] == corpse.get(1)[0])
+				direction = line;
+			else
+				direction = column;
+		}
+		if (direction == column)
+		{
+			for (int[] ints : corpse)
 			{
-				if (ships_map[p][o] == -1)
-					return NO_CHANGE;
+				neighbors.add(new int[]{ints[0], ints[1] + 1});
+				neighbors.add(new int[]{ints[0], ints[1] - 1});
+			}
+			for (int i = -1; i <= 1; i++)
+			{
+				neighbors.add(new int[]{corpse.get(0)[0] - 1, corpse.get(0)[1] + i});
+				neighbors.add(new int[]{corpse.get(corpse.size() - 1)[0] + 1, corpse.get(corpse.size() - 1)[1] + i});
+			}
+		} else
+		{
+			for (int[] ints : corpse)
+			{
+				neighbors.add(new int[]{ints[0] + 1, ints[1]});
+				neighbors.add(new int[]{ints[0] - 1, ints[1]});
+			}
+			for (int i = -1; i <= 1; i++)
+			{
+				neighbors.add(new int[]{corpse.get(0)[0] + i, corpse.get(0)[1] - 1});
+				neighbors.add(new int[]{corpse.get(corpse.size() - 1)[0] + i, corpse.get(corpse.size() - 1)[1] + 1});
 			}
 		}
-		return CHANGE;
+		ArrayList<int[]> result = new ArrayList<>();
+		for (int[] neighbor : neighbors)
+		{
+			if (!(neighbor[0] < 1 || neighbor[1] < 1 || neighbor[0] > 10 || neighbor[1] > 10))
+				result.add(neighbor);
+		}
+		return result;
 	}
 
 	/**
 	 * Метод, отвечающий за удар по судну
-	 * возвращает ArrayList со статусом в случае попадания или промаха
-	 * или все клетки уничтоженого судна
-	 * @param i
-	 * @param j
-	 * @return
-	 * @throws Exception
+	 *
+	 * @param i - координата y
+	 * @param j - - координата x
+	 * @return ArrayList со статусом в случае попадания или промаха или все клетки уничтоженого судна
 	 */
 	protected ArrayList<int[]> shot(int i, int j) throws Exception
 	{
@@ -236,10 +274,13 @@ public class Set_of_ships implements def
 			}
 		}
 		counter--;
-		System.out.println("-1");
 		// TODO <-
 		return cord;
 	}
+
+	/**
+	 * @return количество "живых" кораблей
+	 */
 	public int get_counter()
 	{
 		return counter;
@@ -261,7 +302,8 @@ class Ship implements def
 
 	/**
 	 * Метод, непосредственно описывающий ранение
-	 * @return
+	 *
+	 * @return статус судна
 	 */
 	protected int wound()
 	{
