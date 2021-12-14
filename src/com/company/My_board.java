@@ -103,7 +103,6 @@ public class My_board extends Board
 
 	public int hit(int[] pos)
 	{
-		// TODO: проверка на убийство, проверка на убитый корабль, прверка на конец игры
 		ArrayList<int[]> grind = null;
 		try
 		{
