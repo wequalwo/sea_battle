@@ -15,6 +15,7 @@ abstract public class Board extends JPanel implements ActionListener, def
 	 */
 	protected JButton[][] buttons;
 	private boolean start; // статус начала игры
+	protected Opponent opponent;
 
 	Board()
 	{
@@ -73,21 +74,17 @@ abstract public class Board extends JPanel implements ActionListener, def
 
 	abstract public boolean fix(Field field);
 
-	public boolean set_start(Field field)
+	public boolean set_start(Field field, Opponent opponent)
 	{
-		if (fix(field))
-			start = true;
-		return start;
 
+		start = fix(field);
+		if (start)
+			this.opponent = opponent;
+		return start;
 	}
 
 	protected void reset()
 	{
 		//TODO: сделать reset
-	}
-
-	public boolean get_start()
-	{
-		return start;
 	}
 }

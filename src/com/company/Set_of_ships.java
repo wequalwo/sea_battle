@@ -242,7 +242,6 @@ public class Set_of_ships implements def
 				}
 			}
 		}
-		System.out.println("Error!");
 		recall();
 	}
 

@@ -30,6 +30,7 @@ class Field extends JFrame implements ActionListener, def
 	 */
 	My_board my_board;
 	Opponents_board opponents_board;
+	Opponent opponent;
 
 	static
 	{
@@ -87,7 +88,7 @@ class Field extends JFrame implements ActionListener, def
 		this.add(my_board);
 		this.add(opponents_board);
 		this.setVisible(true);
-
+		opponent = new Opponent(this);
 		// раскомментить!!!
 		//show_info("Expand your fleet!");
 	}
@@ -108,13 +109,12 @@ class Field extends JFrame implements ActionListener, def
 	{
 		if (e.getSource() == start_button)
 		{
-			if (!(my_board.set_start(this) && opponents_board.set_start(this)))
+			if (!(my_board.set_start(this, opponent) && opponents_board.set_start(this, opponent)))
 			{
 				show_error("The ships are not positioned correctly!");
 				return;
 			}
 			disable_start_button();
-
 			// раскомментить!!!
 			//show_info("The game is on!");
 		}

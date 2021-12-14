@@ -11,7 +11,6 @@ public class Opponents_board extends Board
 {
 	public boolean game_status;
 	private Op_observer observer;
-	private Opponent opponent;
 
 	@Override
 	protected boolean get_status()
@@ -32,7 +31,6 @@ public class Opponents_board extends Board
 	public boolean fix(Field field)
 	{
 		game_status = field.game_status;
-		opponent = new Opponent(field);
 		for (int i = 1; i < 11; i++)
 		{
 			for (int j = 1; j < 11; j++)
@@ -50,7 +48,6 @@ public class Opponents_board extends Board
 		}
 		return true;
 	}
-
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public void actionPerformed(ActionEvent e)
@@ -91,13 +88,13 @@ public class Opponents_board extends Board
 						{
 							buttons[p[0]][p[1]].setBackground(Color.gray);
 							buttons[p[0]][p[1]].setEnabled(false);
-							if(!observer.get_game_status())
+							if (!observer.get_game_status())
 							{
 								game_status = false;
 							}
 						}
 						ArrayList<int[]> off_but = observer.fill(grind);
-						for(int[] p: off_but)
+						for (int[] p : off_but)
 						{
 							buttons[p[0]][p[1]].setBackground(Color.blue);
 							buttons[p[0]][p[1]].setEnabled(false);

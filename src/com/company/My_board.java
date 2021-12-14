@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class My_board extends Board
 {
 	private My_observer observer;
-	private Field field;
 	public boolean game_status;
 
 	@Override
@@ -138,9 +137,10 @@ public class My_board extends Board
 				buttons[p[0]][p[1]].setEnabled(false);
 			}
 			ArrayList<int[]> off_but = observer.fill(grind);
-			for(int[] p: off_but)
+			for (int[] p : off_but)
 			{
 				buttons[p[0]][p[1]].setBackground(Color.blue);
+				opponent.disable(new int[]{p[0] - 1, p[1] - 1});
 			}
 		}
 		if (!observer.get_game_status())

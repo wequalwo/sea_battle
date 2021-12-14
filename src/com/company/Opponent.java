@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Random;
 
-//TODO: work work work wolk wolk wolk
+//TODO: осмысленный выстрел
 public class Opponent implements def
 {
 	private final Field field;
@@ -53,7 +53,10 @@ public class Opponent implements def
 		previous_shot = new int[]{i, j};
 		return save(field.hit(previous_shot));
 	}
-
+	public void disable(int[] point)
+	{
+		map[point[0]][point[1]] = MISS;
+	}
 	protected void force_stop(boolean who)
 	{
 
