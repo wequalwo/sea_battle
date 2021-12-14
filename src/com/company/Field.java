@@ -20,6 +20,7 @@ class Field extends JFrame implements ActionListener, def
 	private static final int button_space = 20;        //расстояние от верхней границы окна до кнопки "start" и текста
 	public static int space = 30;                      //расстоянием между панельями
 	public boolean game_status = true;
+	public boolean delete = false;
 	/**
 	 * Кнопка старта игры.
 	 * TODO: Активна тогда и только тогда, когда поле игрока заполнено и заполнено правильно
@@ -32,16 +33,14 @@ class Field extends JFrame implements ActionListener, def
 	Opponents_board opponents_board;
 	Opponent opponent;
 
-	static
 	{
 		System.out.println("oops, it's not done yet :(");
 		// TODO: сделать окно ввода данных перед стартом игры
 /*		JFrame start_init = new JFrame();
 		start_init.setSize(500, 500);
 		start_init.setLocation(start_frame_pos_x, start_frame_pos_y);
-		start_init.setVisible(true);
-		show_info("oops, it's not done yet :(");
-		start_init.setVisible(false);*/
+		start_init.setVisible(true);*/
+		show_info("Sea battle, v.12.1.1");
 	}
 
 	Field()
@@ -135,7 +134,6 @@ class Field extends JFrame implements ActionListener, def
 		int rez = my_board.hit(pos);
 		if (rez == it_is_the_end)
 		{
-			System.out.println("end!");
 			game_status = false;
 			opponents_board.game_status = false;
 			my_board.game_status = false;
@@ -154,5 +152,12 @@ class Field extends JFrame implements ActionListener, def
 		}
 		my_board.reset();
 		opponents_board.reset();
+		int input = JOptionPane.showConfirmDialog(null, "Do you want to play again?", "Exit frame", JOptionPane.YES_NO_OPTION);
+		// 0=yes, 1=no, 2=cancel
+		//System.out.println(input);
+		if(input == 0)
+			Main.reset();
+		else
+			System.exit(0);
 	}
 }

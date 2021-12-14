@@ -19,7 +19,7 @@ interface def
 	int NO_CHANGE = 0;        // ход остается
 	boolean MINE = false;    // принадлежность игроку
 	boolean OPP = true;        // принадлежность противнику
-	int FIELD_WIGHT = 1500;    // длина игрового поля (она же длина панели)
+	int FIELD_WIGHT = 1450;    // длина игрового поля (она же длина панели)
 	int FIELD_HEIGHT = 800; // ширина игрового поля
 	int PANEL_HEIGHT = 100;    // высота панели
 	int start_frame_pos_x = 100; // начальные координаты стартового окна
@@ -41,8 +41,14 @@ interface def
 
 public class Main
 {
+	static Field field;
 	public static void main(String[] args)
 	{
-		Field field = new Field();
+		field = new Field();
+	}
+	public static void reset()
+	{
+		field.dispose();
+		field = new Field();
 	}
 }

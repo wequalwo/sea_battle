@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+
+
+import javax.swing.JOptionPane;
 /**
  * Класс Board отвечает за поле игрока
  */
@@ -87,4 +90,5 @@ abstract public class Board extends JPanel implements ActionListener, def
 	{
 		//TODO: сделать reset
 	}
+
 }
