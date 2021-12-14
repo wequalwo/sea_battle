@@ -8,16 +8,14 @@ public class Op_observer extends Observer
 	{
 		super(whose);
 	}
+
 	public ArrayList<int[]> shot(int i, int j) throws Exception
 	{
 		return set.shot(i, j);
 	}
+
 	public int get_counter()
 	{
 		return set.get_counter();
-	}
-	public ArrayList<int[]> fill(ArrayList<int[]> corpse)
-	{
-		return set.check_neighbors(corpse);
 	}
 }

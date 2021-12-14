@@ -138,6 +138,11 @@ public class My_board extends Board
 				buttons[p[0]][p[1]].setBackground(Color.gray);
 				buttons[p[0]][p[1]].setEnabled(false);
 			}
+			ArrayList<int[]> off_but = observer.fill(grind);
+			for(int[] p: off_but)
+			{
+				buttons[p[0]][p[1]].setBackground(Color.blue);
+			}
 		}
 		if (!observer.get_game_status())
 			return it_is_the_end;

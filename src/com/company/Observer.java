@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+
 /**
  * Класс Observer хранит поле в виле масства int
  * и отвечает за логику проверки возможности установки корабля на определенное поле
@@ -24,9 +26,10 @@ abstract public class Observer implements def
 			}
 		}
 	}
+
 	public boolean get_game_status()
 	{
-		if(set.get_counter() == 0)
+		if (set.get_counter() == 0)
 			return false;
 		return true;
 	}
@@ -34,5 +37,10 @@ abstract public class Observer implements def
 	public int get_sea(int i, int j)
 	{
 		return sea[i][j];
+	}
+
+	public ArrayList<int[]> fill(ArrayList<int[]> corpse)
+	{
+		return set.check_neighbors(corpse);
 	}
 }

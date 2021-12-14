@@ -33,6 +33,10 @@ interface def
 
 	int column = 0;
 	int line = 1;
+	int UP = 0;
+	int LEFT = 1;
+	int DOWN = 2;
+	int RIGHT = 3;
 }
 
 public class Main

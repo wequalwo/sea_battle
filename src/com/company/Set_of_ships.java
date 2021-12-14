@@ -2,18 +2,25 @@ package com.company;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Класс содержащий всю информацию о расположении судов и их статусах
  */
 public class Set_of_ships implements def
 {
-	private int[][] ships_map; // так хранить корабли - алоритмически не самое удачное решение, наверное
+	private final int[][] ships_map; // так хранить корабли - алоритмически не самое удачное решение, наверное
 	final private ArrayList<Ship> ships;
 	private int counter;
 
+	private final int tmp_set = 147;
+	private final Random random;
+	private int CEIL;
+
 	Set_of_ships(boolean whose)
 	{
+		CEIL = 100;
+		random = new Random();
 		counter = 0;
 		ships = new ArrayList<>();
 		for (int i = 0; i < 4; i++)
@@ -40,6 +47,16 @@ public class Set_of_ships implements def
 					};
 		} else
 		{
+			ships_map = new int[10][10];
+			int counter = 0;
+			for (int i = 0; i < 10; i++)
+			{
+				for (int j = 0; j < 10; j++)
+				{
+					ships_map[i][j] = counter;
+					counter++;
+				}
+			}
 			generate();
 		}
 	}
@@ -164,24 +181,266 @@ public class Set_of_ships implements def
 	}
 
 	/**
+	 * пересчет временных номеров клеток после установки судна
+	 */
+	private void recall()
+	{
+		int counter = 0;
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				if (ships_map[i][j] != 100 && ships_map[i][j] != -100)
+				{
+					ships_map[i][j] = counter;
+					counter++;
+				}
+			}
+		}
+	}
+
+	/**
+	 * заполнение клеток окружения
+	 */
+	private void tmp_to_over()
+	{
+		ArrayList<int[]> corp = new ArrayList<>();
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				if (ships_map[i][j] == tmp_set)
+				{
+					ships_map[i][j] = 100;
+					corp.add(new int[]{i + 1, j + 1});
+				}
+			}
+		}
+		corp = check_neighbors(corp);
+		for (int[] ints : corp)
+		{
+			ships_map[ints[0] - 1][ints[1] - 1] = -100;
+		}
+	}
+
+	/**
+	 * Сброс клетки
+	 *
+	 * @param num временный номер клетки
+	 */
+	private void set_into(int num)
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				if (ships_map[i][j] == num)
+				{
+					ships_map[i][j] = -100;
+					recall();
+					return;
+				}
+			}
+		}
+		System.out.println("Error!");
+		recall();
+	}
+
+	/**
+	 * непосредсвтенная попытка установки судна
+	 */
+	private boolean reset_into(int num, int pale)
+	{
+		int x = 0;
+		int y = 0;
+		boolean sts = false;
+		for (int i = 0; i < 10 && !sts; i++)
+		{
+			for (int j = 0; j < 10 && !sts; j++)
+			{
+				if (ships_map[i][j] == num)
+				{
+					y = i;
+					x = j;
+					sts = true;
+				}
+			}
+		}
+		if (!sts)
+			return true;
+		int direction = random.nextInt(4);
+
+		for (int i = 0; i < 4; i++, direction = (direction + 1) % 4, sts = true)
+		{
+			if (direction == UP)
+			{
+				for (int j = 0; j < pale; j++)
+				{
+					if (y - j < 0)
+					{
+						sts = false;
+						break;
+					}
+					if (ships_map[y - j][x] == 100 || ships_map[y - j][x] == -100)
+					{
+						sts = false;
+						break;
+					}
+				}
+				if (sts)
+				{
+					for (int c = 0; c < pale; c++)
+					{
+						ships_map[y - c][x] = tmp_set;
+					}
+					tmp_to_over();
+
+					return false;
+				}
+			} else if (direction == LEFT)
+			{
+				for (int j = 0; j < pale; j++)
+				{
+					if (x - j < 0)
+					{
+						sts = false;
+						break;
+					}
+					if (ships_map[y][x - j] == 100 || ships_map[y][x - j] == -100)
+					{
+						sts = false;
+						break;
+					}
+				}
+				if (sts)
+				{
+					for (int c = 0; c < pale; c++)
+					{
+						ships_map[y][x - c] = tmp_set;
+					}
+					tmp_to_over();
+					return false;
+				}
+			} else if (direction == DOWN)
+			{
+				for (int j = 0; j < pale; j++)
+				{
+					if (y + j > 9)
+					{
+						sts = false;
+						break;
+					}
+					if (ships_map[y + j][x] == 100 || ships_map[y + j][x] == -100)
+					{
+						sts = false;
+						break;
+					}
+				}
+				if (sts)
+				{
+					for (int c = 0; c < pale; c++)
+					{
+						ships_map[y + c][x] = tmp_set;
+					}
+					tmp_to_over();
+					return false;
+				}
+			} else if (direction == RIGHT)
+			{
+				for (int j = 0; j < pale; j++)
+				{
+					if (x + j > 9)
+					{
+						sts = false;
+						break;
+					}
+					if (ships_map[y][x + j] == 100 || ships_map[y][x + j] == -100)
+					{
+						sts = false;
+						break;
+					}
+				}
+				if (sts)
+				{
+					for (int c = 0; c < pale; c++)
+					{
+						ships_map[y][x + c] = tmp_set;
+					}
+					tmp_to_over();
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	//приведение поля к станадртному виду формата sea[]
+	private void clear()
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				if (ships_map[i][j] == 100)
+					ships_map[i][j] = 1;
+				else
+					ships_map[i][j] = 0;
+			}
+		}
+	}
+
+	/**
 	 * генерирует поле автоматически
 	 */
-	private void generate() //генерация поля соперника (TODO: сделсть рандомное заполнение)
+	private void generate()
 	{
-		ships_map =
-				new int[][]{
-						{0, 0, 0, 10, 10, 10, 10, 0, 0, 0},
-						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-						{1, 0, 8, 8, 8, 0, 0, 0, 0, 0},
-						{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-						{0, 0, 5, 5, 0, 9, 0, 7, 7, 0},
-						{2, 0, 0, 0, 0, 9, 0, 0, 0, 0},
-						{0, 0, 0, 0, 0, 9, 0, 0, 0, 0},
-						{3, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-						{0, 0, 0, 0, 6, 0, 4, 0, 0, 0},
-						{0, 0, 0, 0, 6, 0, 0, 0, 0, 0}
-				};
-		counter = 10;
+		// расставляем однопалубники
+		for (int i = 0; i < 4; i++)
+		{
+			int num = random.nextInt(CEIL);
+			while (reset_into(num, 1))
+			{
+				set_into(num);
+				CEIL--;
+				num = random.nextInt(CEIL);
+			}
+			CEIL -= 1;
+		}
+		// расставляем двухпалубники
+		for (int i = 0; i < 3; i++)
+		{
+			int num = random.nextInt(CEIL);
+			while (reset_into(num, 2))
+			{
+				set_into(num);
+				CEIL--;
+				num = random.nextInt(CEIL);
+			}
+			CEIL -= 2;
+		}
+		// расставляем трехпалубники
+		for (int i = 0; i < 2; i++)
+		{
+			int num = random.nextInt(CEIL);
+			while (reset_into(num, 3))
+			{
+				set_into(num);
+				CEIL--;
+				num = random.nextInt(CEIL);
+			}
+			CEIL -= 3;
+		}
+		// расставляем четырехпалубники
+		int num = random.nextInt(CEIL);
+		while (reset_into(num, 4))
+		{
+			set_into(num);
+			CEIL--;
+			num = random.nextInt(CEIL);
+		}
+		clear();
+		create(ships_map);
 	}
 
 	/**

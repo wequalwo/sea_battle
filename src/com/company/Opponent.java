@@ -43,12 +43,12 @@ public class Opponent implements def
 
 	public int force_move()
 	{
-		int i = random.nextInt(def.EDGE);
-		int j = random.nextInt(def.EDGE);
+		int i = random.nextInt(EDGE);
+		int j = random.nextInt(EDGE);
 		while (map[i][j] != 7)
 		{
-			i = random.nextInt(def.EDGE);
-			j = random.nextInt(def.EDGE);
+			i = random.nextInt(EDGE);
+			j = random.nextInt(EDGE);
 		}
 		previous_shot = new int[]{i, j};
 		return save(field.hit(previous_shot));
