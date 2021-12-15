@@ -10,11 +10,30 @@ import java.util.Random;
  */
 public class Opponent implements def
 {
+	/**
+	 * field, witch contains this class
+	 */
 	private final Field field;        // поле, на котором происходит действие (для координации между классами)
+	/**
+	 * it keeps previous shot coordinates
+	 */
 	private int[] previous_shot;      // сохраненный предыдущий выстрел
+	/**
+	 * random to create some fun
+	 */
 	private final Random random;
+	/**
+	 * fight map to save result of previous shoots
+	 */
 	private final int[][] map;        // карта высрелов
+	/**
+	 * directions:
+	 * indicates the direction in which the extension of the wrecked vessel is believed to be
+	 */
 	private int direction;            // направление выстрелов - для добивания подбитых судов
+	/**
+	 * is the direction reliable
+	 */
 	private boolean reliable;         // надежность направлния
 
 	Opponent(Field field)

@@ -9,7 +9,13 @@ import java.util.ArrayList;
  */
 public class Opponents_board extends Board
 {
+	/**
+	 * status of the game
+	 */
 	public boolean game_status;
+	/**
+	 * observer of the board
+	 */
 	private Op_observer observer;
 
 	@Override

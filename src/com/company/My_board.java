@@ -10,7 +10,13 @@ import java.util.ArrayList;
  */
 public class My_board extends Board
 {
+	/**
+	 * observer of the board
+	 */
 	private My_observer observer;
+	/**
+	 * status of the board
+	 */
 	public boolean game_status;
 	@Override
 	protected boolean get_status()

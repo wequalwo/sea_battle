@@ -7,7 +7,14 @@ import java.util.ArrayList;
  */
 abstract public class Observer implements def
 {
+	/**
+	 * cells. It contains some ships
+	 */
 	protected int[][] sea;            // массив статусов клеток для визуализации кораблей
+	/**
+	 * Set_of_ships class
+	 * @see com.company.Set_of_ships
+	 */
 	public Set_of_ships set;        	// набор кораблей
 
 	Observer(boolean whose)
@@ -23,6 +30,9 @@ abstract public class Observer implements def
 		}
 	}
 
+	/**
+	 * @return false if there are not ships anymore
+	 */
 	public boolean get_if_zero_counter()
 	{
 		return set.get_counter() == 0;

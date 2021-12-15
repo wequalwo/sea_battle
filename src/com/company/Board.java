@@ -12,8 +12,14 @@ abstract public class Board extends JPanel implements ActionListener, def
 	/**
 	 * Array of buttons - There is 12 buttons because of edge
 	 */
-	protected JButton[][] buttons;    // массив кнопок поля
+	protected JButton[][] buttons;
+	/**
+	 * stats - status
+	 */
 	private boolean start;            // статус начала игры
+	/**
+	 * this opponent
+	 */
 	protected Opponent opponent;    // объект класса opponent. Отвечает за поведение соперика.
 	// TODO: онлайн оппонент
 

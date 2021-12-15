@@ -9,12 +9,28 @@ import java.util.Random;
  */
 public class Set_of_ships implements def
 {
+	/**
+	 * maps of the ships. It contains not only position but numbers of ships
+	 */
 	private final int[][] ships_map; // так хранить корабли - алоритмически не самое удачное решение, наверное
+	/**
+	 * array of the real ships
+	 */
 	final private ArrayList<Ship> ships;
+	/**
+	 * ships counter
+	 */
 	private int counter;
 
+	/**
+	 * just a number, not a crutch
+	 */
 	private final int tmp_set = 147;
 	private final Random random;
+
+	/**
+	 * variable to shoot once in the ceil
+	 */
 	private int CEIL;
 
 	Set_of_ships(boolean whose)
@@ -508,6 +524,7 @@ public class Set_of_ships implements def
 	 * @param i y-coordinate
 	 * @param j x-coordinate
 	 * @return ArrayList with the status in case of a hit or miss, or all cells of a destroyed ship
+	 * @throws Exception if the shot went wrong
 	 */
 	protected ArrayList<int[]> shot(int i, int j) throws Exception
 	{
@@ -570,6 +587,7 @@ class Ship implements def
 	 * Method directly describing injury
 	 * Gotovtes, kogannye ubludli!
 	 * (Prosti, ne znau kak perevesti)
+	 *
 	 * @return ship status
 	 */
 	protected int wound()

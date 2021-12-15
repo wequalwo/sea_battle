@@ -7,6 +7,9 @@ public class Op_observer extends Observer
 		super(whose);
 	}
 
+	/**
+	 * @return counter
+	 */
 	public int get_counter()
 	{
 		return set.get_counter();
