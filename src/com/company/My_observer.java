@@ -8,12 +8,13 @@ public class My_observer extends Observer
 	}
 
 	/**
-	 * Метод проверки возможности поставить часть судна в данную клетку
-	 * Не проверяет длину судов - за это отвечает set_of_ships
-	 * @see com.company.Set_of_ships#create(int[][])
-	 * @param i координата y
-	 * @param j координата x
+	 * It checks possibility of creating a ship here
+	 * It does not check a length of the ship, checking of the length is a duty of another class
+	 *
+	 * @param i coordinate: y
+	 * @param j coordinate: x
 	 * @return boolean можно или нельзя
+	 * @see com.company.Set_of_ships#create(int[][])
 	 */
 	private boolean is_legal(int i, int j)
 	{
@@ -40,9 +41,10 @@ public class My_observer extends Observer
 	}
 
 	/**
-	 * создает флот с помощью класса Set_of_ships
+	 * it creates a fleet
+	 *
+	 * @return boolean is it possible?
 	 * @see com.company.Set_of_ships#create(int[][])
-	 * @return boolean можно или нельзя аоздать поле с кораблями, установленными игоком
 	 */
 	public boolean create_fleet()
 	{
@@ -50,10 +52,11 @@ public class My_observer extends Observer
 	}
 
 	/**
-	 * Метод check_sea возвращает -1, если в принятую клетку установить часть судна невозможно
-	 * и статус клетки, если возможно:
-	 * (1) - уже что-то стоит
-	 * (0) - клетка путса
+	 * checks if it is possible to create a ship here
+	 *
+	 * @param i coordinate: y
+	 * @param j coordinate: x
+	 * @return is it possible?
 	 */
 	public int check_sea(int i, int j)
 	{
@@ -66,7 +69,10 @@ public class My_observer extends Observer
 
 
 	/**
-	 * Инвертирует данное поле (устанавливает/снимает метку судна)
+	 * inverts the position
+	 *
+	 * @param i coordinate: y
+	 * @param j coordinate: x
 	 */
 	public void invert_point(int i, int j)
 	{

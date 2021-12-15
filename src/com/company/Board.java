@@ -5,13 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Класс Board отвечает за поле игрока
+ * Class Board for game op-and player's boards
  */
 abstract public class Board extends JPanel implements ActionListener, def
 {
 	/**
-	 * Массив кнопок buttons - это клетки поля. Их 12, а не 10, потому что красоты ради
-	 * было выполнено окаймление из неактивных кнопок с координатной сеткой
+	 * Array of buttons - There is 12 buttons because of edge
 	 */
 	protected JButton[][] buttons;    // массив кнопок поля
 	private boolean start;            // статус начала игры
@@ -70,33 +69,33 @@ abstract public class Board extends JPanel implements ActionListener, def
 	}
 
 	/**
-	 * Методполучения статуса поля
+	 * getting game status
 	 *
 	 * @return start
 	 */
 	abstract protected boolean get_status();
 
 	/**
-	 * Метод, создающй обсервера.
+	 * Method to create an observer
 	 *
 	 * @see com.company.Observer
 	 */
 	abstract protected void create_obs();
 
 	/**
-	 * метод фиксации поля для начала игры
+	 * It fixes boards and starts game
 	 *
-	 * @param field поле, в кором находятся my_board и op_board
-	 * @return boolean успешно (true), неуспешно (false)
+	 * @param field field which contains this board
+	 * @return boolean result of fixing
 	 */
 	abstract public boolean fix(Field field);
 
 	/**
-	 * метод непосредственного начала игры
+	 * stating game - method.
 	 *
-	 * @param field    поле, в кором находятся my_board и op_board
-	 * @param opponent соперник
-	 * @return boolean успешно (true), неуспешно (false)
+	 * @param field    field which contains this board
+	 * @param opponent
+	 * @return boolean result of starting
 	 * @see com.company.Opponent
 	 */
 	public boolean set_start(Field field, Opponent opponent)

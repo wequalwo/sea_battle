@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Класс содержащий всю информацию о расположении судов и их статусах
+ * It keeps whole ships info
  */
 public class Set_of_ships implements def
 {
@@ -62,11 +62,11 @@ public class Set_of_ships implements def
 	}
 
 	/**
-	 * Метод, создающий массив для игры по массиву статусов клеток
-	 * массив игры содержит не только информацию о положении кораблей, но и ифнормации о порядковом номере суда
+	 * It creates status-cells which contains not only position but numbers of ships
 	 *
-	 * @param sea статусы клеток
-	 * @return Ok или нет
+	 * @param sea sea from
+	 * @return ok or not
+	 * @see com.company.Observer
 	 */
 	protected boolean create(int[][] sea)
 	{
@@ -181,7 +181,7 @@ public class Set_of_ships implements def
 	}
 
 	/**
-	 * пересчет временных номеров клеток после установки судна
+	 * recalculation of temporary cell numbers after the installation of the vessel
 	 */
 	private void recall()
 	{
@@ -200,7 +200,7 @@ public class Set_of_ships implements def
 	}
 
 	/**
-	 * заполнение клеток окружения
+	 * filling the cells of the environment
 	 */
 	private void tmp_to_over()
 	{
@@ -224,9 +224,9 @@ public class Set_of_ships implements def
 	}
 
 	/**
-	 * Сброс клетки
+	 * Cell reset
 	 *
-	 * @param num временный номер клетки
+	 * @param num temporary cell number
 	 */
 	private void set_into(int num)
 	{
@@ -246,7 +246,8 @@ public class Set_of_ships implements def
 	}
 
 	/**
-	 * непосредсвтенная попытка установки судна
+	 * direct attempt at ship installation
+	 * yeah boy, uniforms are on their way.
 	 */
 	private boolean reset_into(int num, int pale)
 	{
@@ -375,7 +376,9 @@ public class Set_of_ships implements def
 	}
 
 	/**
-	 * приведение поля к станадртному виду формата sea[]
+	 * Bringing the field to the sea []
+	 * One size fits all!
+	 *
 	 * @see com.company.Opponent
 	 */
 	private void clear()
@@ -393,7 +396,7 @@ public class Set_of_ships implements def
 	}
 
 	/**
-	 * генерирует поле автоматически
+	 * generates the field automatically
 	 */
 	private void generate()
 	{
@@ -447,8 +450,8 @@ public class Set_of_ships implements def
 	}
 
 	/**
-	 * @param corpse массив, содержащий клетки затопленного судна
-	 * @return массив клеток окружения
+	 * @param corpse array containing the cells of the sunken ship
+	 * @return array of environment cells
 	 */
 	protected ArrayList<int[]> check_neighbors(ArrayList<int[]> corpse)
 	{
@@ -499,11 +502,12 @@ public class Set_of_ships implements def
 	}
 
 	/**
-	 * Метод, отвечающий за удар по судну
+	 * Method responsible for hitting the ship
+	 * Do not hurt him! Hands off, it is my precious.
 	 *
-	 * @param i - координата y
-	 * @param j - - координата x
-	 * @return ArrayList со статусом в случае попадания или промаха или все клетки уничтоженого судна
+	 * @param i y-coordinate
+	 * @param j x-coordinate
+	 * @return ArrayList with the status in case of a hit or miss, or all cells of a destroyed ship
 	 */
 	protected ArrayList<int[]> shot(int i, int j) throws Exception
 	{
@@ -541,7 +545,7 @@ public class Set_of_ships implements def
 	}
 
 	/**
-	 * @return количество "живых" кораблей
+	 * @return number of "live" ships
 	 */
 	public int get_counter()
 	{
@@ -551,7 +555,7 @@ public class Set_of_ships implements def
 }
 
 /**
- * класс, отвечаюший за здоровье каждого судна
+ * the class responsible for the health of each ship
  */
 class Ship implements def
 {
@@ -563,9 +567,10 @@ class Ship implements def
 	}
 
 	/**
-	 * Метод, непосредственно описывающий ранение
-	 *
-	 * @return статус судна
+	 * Method directly describing injury
+	 * Gotovtes, kogannye ubludli!
+	 * (Prosti, ne znau kak perevesti)
+	 * @return ship status
 	 */
 	protected int wound()
 	{

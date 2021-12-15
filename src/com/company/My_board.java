@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 /**
- * Класс Opponents_board реализует графику и логику поля игрока
+ * The Opponents Board class implements the graphics and logic of the players field
  */
 public class My_board extends Board
 {
@@ -25,7 +25,7 @@ public class My_board extends Board
 	}
 
 	/**
-	 * Метод fix реалмзует старт игры - все кнопки поля игрока становятся неактивными
+	 * It starts game
 	 */
 	@Override
 	public boolean fix(Field field)
@@ -100,9 +100,9 @@ public class My_board extends Board
 	}
 
 	/**
-	 * метод удара ПО полю:
-	 * @param pos поиция, в которую ударили
-	 * @return статус клетки
+	 * It hits connected board
+	 * @param pos hit position
+	 * @return status of hit position after the hit
 	 */
 	public int hit(int[] pos)
 	{

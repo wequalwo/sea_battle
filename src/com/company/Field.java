@@ -6,7 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Главный класс, отвечающий за прорисовку полей, кнопок, добавления панелей
+ * Main class.
+ * It is responsible for whole graphics and repainting
  */
 
 final class Field extends JFrame implements ActionListener, def
@@ -21,12 +22,11 @@ final class Field extends JFrame implements ActionListener, def
 	public static int space = 30;                      //расстоянием между панельями
 	public boolean game_status = true;
 	/**
-	 * Кнопка старта игры.
-	 * TODO: Активна тогда и только тогда, когда поле игрока заполнено и заполнено правильно
+	 * Start game button
 	 */
 	private final JButton start_button;
 	/**
-	 * Панели полей игрока и соперника
+	 * Panels of player and opponent
 	 */
 	My_board my_board;
 	Opponents_board opponents_board;
@@ -95,10 +95,6 @@ final class Field extends JFrame implements ActionListener, def
 		start_button.setEnabled(false);
 	}
 
-	/**
-	 * Метод работает с кнопкой старта игры
-	 * TODO: реализовать кнопку
-	 */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
@@ -125,6 +121,12 @@ final class Field extends JFrame implements ActionListener, def
 		JOptionPane.showMessageDialog(null, message, "GS notification", JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	/**
+	 * It helps to fight
+	 * @param pos where you hit
+	 * @return result
+	 * @see com.company.Opponent
+	 */
 	public int hit(int[] pos)
 	{
 		int rez = my_board.hit(pos);

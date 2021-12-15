@@ -1,13 +1,14 @@
 package com.company;
+
 /**
- * Морской бой <b>maker</b> и <b>price</b>.
+ * Sea battle <b>maker</b> и <b>price</b>.
  *
- * @autor Серафим Иванов
- * @version 14.3 commented
+ * @autor wequalwo aka Seraphim Ivanov
+ * @version 14.4 eng commented
  */
 
 /**
- * интерфейс глобальных переменных (для удобного доступа. Идея так себе)
+ * interface for global variables (was not a good decision)
  */
 interface def
 {
@@ -50,7 +51,7 @@ public class Main
 	}
 
 	/**
-	 * Метод начала новой игры
+	 * It starts a new game
 	 */
 	public static void reset()
 	{

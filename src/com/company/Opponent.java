@@ -3,7 +3,10 @@ package com.company;
 import java.util.Random;
 
 /**
- * Класс, отвечающий за поведение AI
+ * It controls AI
+ * But what did u think? We've really got to keep an eye on AI, otherwise... Well, u know
+ * Yeah, i got that this planning of classes is weird. But it reminds me the chains of Tai Lung from Kung Fu Panda
+ * funny, isn't it?
  */
 public class Opponent implements def
 {
@@ -37,10 +40,10 @@ public class Opponent implements def
 	}
 
 	/**
-	 * Метод схоранения статуса клетки
+	 * It keeps a status
 	 *
-	 * @param status статус, полученный от обсервера
-	 * @return тот же статус, но корреткирует его у случае, если кораблей не осталось
+	 * @param status status received from the observer
+	 * @return status, but also it can return end-game-status
 	 */
 	private int save(int status)
 	{
@@ -59,21 +62,21 @@ public class Opponent implements def
 	}
 
 	/**
-	 * Метод генерации выстрела
+	 * It generate a shot
 	 *
-	 * @return результат выстрела:
-	 * DEAD - корабль был убит
-	 * SUNKEN - корабль подбит
-	 * MISS - промах
+	 * @return result of the shot
+	 * DEAD
+	 * SUNKEN
+	 * or
+	 * MISS
+	 * @see com.company.Main (def)
+	 * Don't try to figure it out, save your eye!
 	 */
 	public int force_move()
 	{
-		System.out.println("Previous shot: " + previous_shot[0] + " " + previous_shot[1] + ", here is " + map[previous_shot[0]][previous_shot[1]]);
 		if (map[previous_shot[0]][previous_shot[1]] == SUNKEN)
 		{
 			int[] future = new int[]{previous_shot[0], previous_shot[1]};
-			//boolean b = future[0] >= 0 && future[0] <= 9 && future[1] >= 0 && future[1] <= 9;
-
 			if (direction == UNDEF)
 			{
 				direction = random.nextInt(4);
@@ -183,9 +186,9 @@ public class Opponent implements def
 	}
 
 	/**
-	 * Метод "выключения" клетки - ставит в соответствующиую клетку map MISS
+	 * It turns off some cells
 	 *
-	 * @param point координаты клетки
+	 * @param point coordinates of the cells
 	 */
 	public void disable(int[] point)
 	{
@@ -193,9 +196,9 @@ public class Opponent implements def
 	}
 
 	/**
-	 * Установка статуса окончания игры
+	 * It inverts the game status
 	 *
-	 * @param who - кто выиграл
+	 * @param who who won?
 	 */
 	protected void force_stop(boolean who)
 	{

@@ -24,9 +24,6 @@ public class Opponents_board extends Board
 		observer = new Op_observer(get_status());
 	}
 
-	/**
-	 * Метод fix реалмзует старт игры - все кнопки поля оппонентна становятся активными
-	 */
 	@Override
 	public boolean fix(Field field)
 	{
@@ -48,6 +45,7 @@ public class Opponents_board extends Board
 		}
 		return true;
 	}
+
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public void actionPerformed(ActionEvent e)
@@ -55,7 +53,7 @@ public class Opponents_board extends Board
 		boolean search_status = true;
 		for (int i = 1; i < 11; i++)
 		{
-			if(!search_status)
+			if (!search_status)
 				break;
 			for (int j = 1; j < 11; j++)
 			{
@@ -78,10 +76,9 @@ public class Opponents_board extends Board
 					if (grind.get(0)[0] == MISS) // выстрел мимо
 					{
 						buttons[i][j].setBackground(Color.blue);
-						// TODO: раскомментировать, когда будет все сделано
-						// buttons[i][j].setEnabled(false);
+						buttons[i][j].setEnabled(false);
 
-						while (opponent.force_move() != MISS); // до тех пор, пока соперник не промазал, он ходит
+						while (opponent.force_move() != MISS) ; // до тех пор, пока соперник не промазал, он ходит
 					} else if (grind.get(0)[0] == SUNKEN)// попал
 					{
 						buttons[i][j].setBackground(Color.orange);
