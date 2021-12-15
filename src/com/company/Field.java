@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
  * Главный класс, отвечающий за прорисовку полей, кнопок, добавления панелей
  */
 
-class Field extends JFrame implements ActionListener, def
+final class Field extends JFrame implements ActionListener, def
 {
 
 	public static int field_size = 50;                 //коэффициент размера поля
@@ -20,7 +20,6 @@ class Field extends JFrame implements ActionListener, def
 	private static final int button_space = 20;        //расстояние от верхней границы окна до кнопки "start" и текста
 	public static int space = 30;                      //расстоянием между панельями
 	public boolean game_status = true;
-	public boolean delete = false;
 	/**
 	 * Кнопка старта игры.
 	 * TODO: Активна тогда и только тогда, когда поле игрока заполнено и заполнено правильно
@@ -32,16 +31,6 @@ class Field extends JFrame implements ActionListener, def
 	My_board my_board;
 	Opponents_board opponents_board;
 	Opponent opponent;
-
-	{
-		System.out.println("oops, it's not done yet :(");
-		// TODO: сделать окно ввода данных перед стартом игры
-/*		JFrame start_init = new JFrame();
-		start_init.setSize(500, 500);
-		start_init.setLocation(start_frame_pos_x, start_frame_pos_y);
-		start_init.setVisible(true);*/
-		show_info("Sea battle, v.12.1.1");
-	}
 
 	Field()
 	{
@@ -88,8 +77,7 @@ class Field extends JFrame implements ActionListener, def
 		this.add(opponents_board);
 		this.setVisible(true);
 		opponent = new Opponent(this);
-		// раскомментить!!!
-		//show_info("Expand your fleet!");
+		show_info("Expand your fleet!");
 	}
 
 	private void disable_start_button()
