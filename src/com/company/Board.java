@@ -94,7 +94,7 @@ abstract public class Board extends JPanel implements ActionListener, def
 	 * stating game - method.
 	 *
 	 * @param field    field which contains this board
-	 * @param opponent
+	 * @param opponent opponent
 	 * @return boolean result of starting
 	 * @see com.company.Opponent
 	 */
