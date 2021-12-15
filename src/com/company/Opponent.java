@@ -3,7 +3,7 @@ package com.company;
 import java.util.Random;
 
 /**
- * It controls AI
+ * It controls AI.
  * But what did u think? We've really got to keep an eye on AI, otherwise... Well, u know
  * Yeah, i got that this planning of classes is weird. But it reminds me the chains of Tai Lung from Kung Fu Panda
  * funny, isn't it?
