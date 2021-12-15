@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * It keeps whole ships info
+ * It keeps info about ships.
  */
 public class Set_of_ships implements def
 {
@@ -570,7 +570,7 @@ public class Set_of_ships implements def
 }
 
 /**
- * the class responsible for the health of each ship
+ * the class responsible for the health of each ship.
  */
 class Ship implements def
 {

@@ -2,7 +2,7 @@ package com.company;
 
 /**
  * Extends the observer.
- * It is only op-s observer
+ * It is only op-s observer.
  */
 public class Op_observer extends Observer
 {

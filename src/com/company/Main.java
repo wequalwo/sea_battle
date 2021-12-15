@@ -42,7 +42,7 @@ interface def
 }
 
 /**
- * Program entry point
+ * Program entry point.
  */
 public class Main
 {

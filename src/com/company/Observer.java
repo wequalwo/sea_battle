@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 
 /**
- * Class observer for the connection between boards and sets of ships
+ * Class observer for the connection between boards and sets of ships.
  */
 abstract public class Observer implements def
 {

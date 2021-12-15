@@ -2,7 +2,7 @@ package com.company;
 
 /**
  * Extends the observer.
- * It is only player's observer
+ * It is only player's observer.
  */
 public class My_observer extends Observer
 {

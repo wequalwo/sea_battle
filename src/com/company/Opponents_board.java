@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 /**
- * The Opponents_board class implements the graphics and logic of the opponent's field
+ * The Opponents_board class implements the graphics and logic of the opponent's field.
  */
 public class Opponents_board extends Board
 {

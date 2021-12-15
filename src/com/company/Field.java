@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Main class.
- * It is responsible for whole graphics and repainting
+ * It is responsible for whole graphics and repainting.
  */
 
 final class Field extends JFrame implements ActionListener, def

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 /**
- * The Opponents Board class implements the graphics and logic of the players field
+ * The Opponents Board class implements the graphics and logic of the players field.
  */
 public class My_board extends Board
 {
