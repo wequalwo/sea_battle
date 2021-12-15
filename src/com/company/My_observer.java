@@ -1,5 +1,9 @@
 package com.company;
 
+/**
+ * Extends the observer.
+ * It is only player's observer
+ */
 public class My_observer extends Observer
 {
 	My_observer(boolean whose)

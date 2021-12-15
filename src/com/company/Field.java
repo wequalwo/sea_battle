@@ -123,6 +123,7 @@ final class Field extends JFrame implements ActionListener, def
 
 	/**
 	 * It helps to fight
+	 *
 	 * @param pos where you hit
 	 * @return result
 	 * @see com.company.Opponent

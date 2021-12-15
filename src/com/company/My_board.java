@@ -18,6 +18,7 @@ public class My_board extends Board
 	 * status of the board
 	 */
 	public boolean game_status;
+
 	@Override
 	protected boolean get_status()
 	{
@@ -107,6 +108,7 @@ public class My_board extends Board
 
 	/**
 	 * It hits connected board
+	 *
 	 * @param pos hit position
 	 * @return status of hit position after the hit
 	 */
@@ -147,7 +149,7 @@ public class My_board extends Board
 				buttons[p[0]][p[1]].setEnabled(false);
 			}
 			ArrayList<int[]> off_but = observer.fill(grind);
-			for(int[] p: off_but)
+			for (int[] p : off_but)
 			{
 				buttons[p[0]][p[1]].setBackground(Color.blue);
 				opponent.disable(new int[]{p[0] - 1, p[1] - 1});

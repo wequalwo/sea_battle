@@ -13,9 +13,10 @@ abstract public class Observer implements def
 	protected int[][] sea;            // массив статусов клеток для визуализации кораблей
 	/**
 	 * Set_of_ships class
+	 *
 	 * @see com.company.Set_of_ships
 	 */
-	public Set_of_ships set;        	// набор кораблей
+	public Set_of_ships set;            // набор кораблей
 
 	Observer(boolean whose)
 	{
@@ -50,6 +51,7 @@ abstract public class Observer implements def
 
 	/**
 	 * necessary for correct play
+	 *
 	 * @param corpse flooded ship array
 	 * @return all his neighbors
 	 */
@@ -60,6 +62,7 @@ abstract public class Observer implements def
 
 	/**
 	 * describes a blow
+	 *
 	 * @param i coordinate of the hit: y
 	 * @param j coordinate of the hit: x
 	 * @return array of the cages:

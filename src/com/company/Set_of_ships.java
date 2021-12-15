@@ -18,16 +18,14 @@ public class Set_of_ships implements def
 	 */
 	final private ArrayList<Ship> ships;
 	/**
-	 * ships counter
-	 */
-	private int counter;
-
-	/**
 	 * just a number, not a crutch
 	 */
 	private final int tmp_set = 147;
 	private final Random random;
-
+	/**
+	 * ships counter
+	 */
+	private int counter;
 	/**
 	 * variable to shoot once in the ceil
 	 */

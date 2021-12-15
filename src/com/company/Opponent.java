@@ -77,7 +77,7 @@ public class Opponent implements def
 
 	private boolean b(int[] future)
 	{
-		return future[0] >= 0 && future[0] <= 9 && future[1] >= 0 && future[1] <= 9;
+		return future[0] < 0 || future[0] > 9 || future[1] < 0 || future[1] > 9;
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class Opponent implements def
 				else
 					future[1]++;
 
-				if (!b(future))
+				if (b(future))
 				{
 					if (reliable)
 					{
@@ -147,6 +147,13 @@ public class Opponent implements def
 							future[1]--;
 						else
 							future[1]++;
+
+						if (b(future))
+						{
+							direction = (direction + 2) % 4;
+							future[0] = previous_shot[0];
+							future[1] = previous_shot[1];
+						}
 					}
 					if (direction == UP)
 						future[0]++;

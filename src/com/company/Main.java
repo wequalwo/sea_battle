@@ -41,6 +41,9 @@ interface def
 	int UNDEF = -8;
 }
 
+/**
+ * Program entry point
+ */
 public class Main
 {
 	static Field field;
