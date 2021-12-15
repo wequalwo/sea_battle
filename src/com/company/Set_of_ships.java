@@ -374,7 +374,10 @@ public class Set_of_ships implements def
 		return true;
 	}
 
-	//приведение поля к станадртному виду формата sea[]
+	/**
+	 * приведение поля к станадртному виду формата sea[]
+	 * @see com.company.Opponent
+	 */
 	private void clear()
 	{
 		for (int i = 0; i < 10; i++)

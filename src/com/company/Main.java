@@ -1,20 +1,17 @@
 package com.company;
 /**
  * Морской бой <b>maker</b> и <b>price</b>.
+ *
  * @autor Серафим Иванов
- * @version 14.2
+ * @version 14.3 commented
  */
 
-
 /**
- * TODO 1 : раскомменить объявления
- * TODO 2 :
+ * интерфейс глобальных переменных (для удобного доступа. Идея так себе)
  */
 interface def
 {
 	int DELTA = 1;            // смещение массива - считать с нуля, а не с единицы (из-за окаймления поля)
-	//int HIT = 0;			// статус - попадание
-
 
 	int MISS = -1;            // статус - мимо
 	int DEAD = -2;            // статус - судно затоплено
@@ -51,6 +48,10 @@ public class Main
 	{
 		field = new Field();
 	}
+
+	/**
+	 * Метод начала новой игры
+	 */
 	public static void reset()
 	{
 		field.dispose();

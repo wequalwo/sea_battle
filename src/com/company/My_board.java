@@ -3,7 +3,6 @@ package com.company;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Random;
 
 
 /**
@@ -100,6 +99,11 @@ public class My_board extends Board
 		}
 	}
 
+	/**
+	 * метод удара ПО полю:
+	 * @param pos поиция, в которую ударили
+	 * @return статус клетки
+	 */
 	public int hit(int[] pos)
 	{
 		ArrayList<int[]> grind = null;
@@ -115,7 +119,7 @@ public class My_board extends Board
 		{
 			throw new NullPointerException();
 		}
-		if (!observer.get_game_status())
+		if (observer.get_if_zero_counter())
 		{
 			buttons[pos[0] + DELTA][pos[1] + DELTA].setBackground(Color.RED);
 			return it_is_the_end;
@@ -143,7 +147,7 @@ public class My_board extends Board
 				opponent.disable(new int[]{p[0] - 1, p[1] - 1});
 			}
 		}
-		if (!observer.get_game_status())
+		if (observer.get_if_zero_counter())
 			return it_is_the_end;
 		return DEAD;
 	}

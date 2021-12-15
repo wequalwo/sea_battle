@@ -79,13 +79,15 @@ final class Field extends JFrame implements ActionListener, def
 		opponent = new Opponent(this);
 		show_info("Expand your fleet!");
 	}
+
 	protected void rep()
 	{
 		//this.setVisible(false);
-		my_board.repaint();;
+		my_board.repaint();
 		this.repaint();
 		//this.setVisible(true);
 	}
+
 	private void disable_start_button()
 	{
 		start_button.setBackground(Color.black);
@@ -144,12 +146,10 @@ final class Field extends JFrame implements ActionListener, def
 		{
 			show_info("Game over. Your opponent won. Try again!");
 		}
-		my_board.reset();
-		opponents_board.reset();
 		int input = JOptionPane.showConfirmDialog(null, "Do you want to play again?", "Exit frame", JOptionPane.YES_NO_OPTION);
 		// 0=yes, 1=no, 2=cancel
 		//System.out.println(input);
-		if(input == 0)
+		if (input == 0)
 			Main.reset();
 		else
 			System.exit(0);

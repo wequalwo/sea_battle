@@ -4,9 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-
-
-import javax.swing.JOptionPane;
 /**
  * Класс Board отвечает за поле игрока
  */
@@ -16,9 +13,10 @@ abstract public class Board extends JPanel implements ActionListener, def
 	 * Массив кнопок buttons - это клетки поля. Их 12, а не 10, потому что красоты ради
 	 * было выполнено окаймление из неактивных кнопок с координатной сеткой
 	 */
-	protected JButton[][] buttons;
-	private boolean start; // статус начала игры
-	protected Opponent opponent;
+	protected JButton[][] buttons;    // массив кнопок поля
+	private boolean start;            // статус начала игры
+	protected Opponent opponent;    // объект класса opponent. Отвечает за поведение соперика.
+	// TODO: онлайн оппонент
 
 	Board()
 	{
@@ -71,12 +69,36 @@ abstract public class Board extends JPanel implements ActionListener, def
 		}
 	}
 
+	/**
+	 * Методполучения статуса поля
+	 *
+	 * @return start
+	 */
 	abstract protected boolean get_status();
 
+	/**
+	 * Метод, создающй обсервера.
+	 *
+	 * @see com.company.Observer
+	 */
 	abstract protected void create_obs();
 
+	/**
+	 * метод фиксации поля для начала игры
+	 *
+	 * @param field поле, в кором находятся my_board и op_board
+	 * @return boolean успешно (true), неуспешно (false)
+	 */
 	abstract public boolean fix(Field field);
 
+	/**
+	 * метод непосредственного начала игры
+	 *
+	 * @param field    поле, в кором находятся my_board и op_board
+	 * @param opponent соперник
+	 * @return boolean успешно (true), неуспешно (false)
+	 * @see com.company.Opponent
+	 */
 	public boolean set_start(Field field, Opponent opponent)
 	{
 
@@ -84,11 +106,6 @@ abstract public class Board extends JPanel implements ActionListener, def
 		if (start)
 			this.opponent = opponent;
 		return start;
-	}
-
-	protected void reset()
-	{
-		//TODO: сделать reset
 	}
 
 }

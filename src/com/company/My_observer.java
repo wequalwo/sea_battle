@@ -1,21 +1,19 @@
 package com.company;
 
-import java.util.ArrayList;
-
 public class My_observer extends Observer
 {
 	My_observer(boolean whose)
 	{
 		super(whose);
 	}
-/*	private boolean lines(int i, int j)
-	{
-		//TODO: проверка на длину и загибания
-		return true;
-	}*/
 
 	/**
-	 * Проверка на воможностть установки части корабля на данную клетку
+	 * Метод проверки возможности поставить часть судна в данную клетку
+	 * Не проверяет длину судов - за это отвечает set_of_ships
+	 * @see com.company.Set_of_ships#create(int[][])
+	 * @param i координата y
+	 * @param j координата x
+	 * @return boolean можно или нельзя
 	 */
 	private boolean is_legal(int i, int j)
 	{
@@ -41,6 +39,11 @@ public class My_observer extends Observer
 		return true;
 	}
 
+	/**
+	 * создает флот с помощью класса Set_of_ships
+	 * @see com.company.Set_of_ships#create(int[][])
+	 * @return boolean можно или нельзя аоздать поле с кораблями, установленными игоком
+	 */
 	public boolean create_fleet()
 	{
 		return set.create(sea);
@@ -61,10 +64,6 @@ public class My_observer extends Observer
 		return 0;
 	}
 
-	public ArrayList<int[]> shot(int i, int j) throws Exception
-	{
-		return set.shot(i, j);
-	}
 
 	/**
 	 * Инвертирует данное поле (устанавливает/снимает метку судна)

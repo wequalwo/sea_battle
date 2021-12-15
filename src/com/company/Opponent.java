@@ -34,7 +34,6 @@ public class Opponent implements def
 						{7, 7, 7, 7, 7, 7, 7, 7, 7, 7},
 						{7, 7, 7, 7, 7, 7, 7, 7, 7, 7}
 				};
-		direction = UNDEF;
 	}
 
 	/**
@@ -104,13 +103,11 @@ public class Opponent implements def
 					future[0] = previous_shot[0];
 					future[1] = previous_shot[1];
 				}
-				System.out.println("b is " + b(future) + " and future is (" + future[0] + ", " + future[1] + ")");
 			}
 
 			int rez = field.hit(future);
 			int regulate = save(rez);
 			map[future[0]][future[1]] = rez;
-			System.out.println("in " + future[0] + " " + future[1] + " " + map[future[0]][future[1]]);
 			map[previous_shot[0]][previous_shot[1]] = SUNKEN;
 
 			if (reliable)
@@ -137,10 +134,6 @@ public class Opponent implements def
 						future[1]++;
 					else
 						future[1]--;
-					if (!b(future))
-					{
-						System.out.println("130 Error, fuck u!");
-					}
 					future[0] = previous_shot[0];
 					future[1] = previous_shot[1];
 				} else if (rez == DEAD)
@@ -148,12 +141,10 @@ public class Opponent implements def
 					direction = UNDEF;
 					previous_shot[0] = future[0];
 					previous_shot[1] = future[1];
-					System.out.println("CHANGED because of dead!");
 				} else
 				{
 					previous_shot[0] = future[0];
 					previous_shot[1] = future[1];
-					System.out.println("CHANGED because of sunken");
 				}
 			} else
 			{
@@ -166,13 +157,11 @@ public class Opponent implements def
 					direction = UNDEF;
 					previous_shot[0] = future[0];
 					previous_shot[1] = future[1];
-					System.out.println("CHANGED because of dead instant");
 				} else
 				{
 					reliable = true;
 					previous_shot[0] = future[0];
 					previous_shot[1] = future[1];
-					System.out.println("CHANGED because of sunken instant");
 				}
 			}
 			field.rep();
@@ -190,7 +179,6 @@ public class Opponent implements def
 			direction = UNDEF;
 		}
 		field.rep();
-		int a = 0;
 		return save(field.hit(previous_shot));
 	}
 

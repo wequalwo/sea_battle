@@ -3,7 +3,6 @@ package com.company;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Класс Opponents_board реализует графику и логику поля оппонента
@@ -93,7 +92,7 @@ public class Opponents_board extends Board
 						{
 							buttons[p[0]][p[1]].setBackground(Color.gray);
 							buttons[p[0]][p[1]].setEnabled(false);
-							if (!observer.get_game_status())
+							if (observer.get_if_zero_counter())
 							{
 								game_status = false;
 							}
@@ -114,7 +113,6 @@ public class Opponents_board extends Board
 		{
 			opponent.force_stop(observer.get_counter() == 0);
 		}
-		int a = 0;
 	}
 }
 
