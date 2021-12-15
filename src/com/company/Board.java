@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Class Board for game. It will be extended by Opponents_board and My_board
+ * Class Board for the game. It will be extended by Opponents_board and My_board
  */
 abstract public class Board extends JPanel implements ActionListener, def
 {
