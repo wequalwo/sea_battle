@@ -8,11 +8,11 @@ import java.util.Random;
 public class Opponent implements def
 {
 	private final Field field;        // поле, на котором происходит действие (для координации между классами)
-	private int[] previous_shot;    // сохраненный предыдущий выстрел
+	private int[] previous_shot;      // сохраненный предыдущий выстрел
 	private final Random random;
 	private final int[][] map;        // карта высрелов
 	private int direction;            // направление выстрелов - для добивания подбитых судов
-	private boolean reliable;        // надежность направлния
+	private boolean reliable;         // надежность направлния
 
 	Opponent(Field field)
 	{
@@ -53,10 +53,12 @@ public class Opponent implements def
 			map[previous_shot[0]][previous_shot[1]] = status;
 		return status;
 	}
+
 	private boolean b(int[] future)
 	{
 		return future[0] >= 0 && future[0] <= 9 && future[1] >= 0 && future[1] <= 9;
 	}
+
 	/**
 	 * Метод генерации выстрела
 	 *
@@ -67,7 +69,7 @@ public class Opponent implements def
 	 */
 	public int force_move()
 	{
-		System.out.println("Previous shot: " + previous_shot[0] + " " + previous_shot[1]);
+		System.out.println("Previous shot: " + previous_shot[0] + " " + previous_shot[1] + ", here is " + map[previous_shot[0]][previous_shot[1]]);
 		if (map[previous_shot[0]][previous_shot[1]] == SUNKEN)
 		{
 			int[] future = new int[]{previous_shot[0], previous_shot[1]};
@@ -95,18 +97,22 @@ public class Opponent implements def
 					if (reliable)
 					{
 						direction = (direction + 2) % 4;
-					}
-					else
+					} else
 					{
 						direction = (direction + 1) % 4;
 					}
 					future[0] = previous_shot[0];
 					future[1] = previous_shot[1];
 				}
-				System.out.println("b is " + b(future) + " and future is (" +  future[0] + ", " + future[1] + ")");
+				System.out.println("b is " + b(future) + " and future is (" + future[0] + ", " + future[1] + ")");
 			}
 
 			int rez = field.hit(future);
+			int regulate = save(rez);
+			map[future[0]][future[1]] = rez;
+			System.out.println("in " + future[0] + " " + future[1] + " " + map[future[0]][future[1]]);
+			map[previous_shot[0]][previous_shot[1]] = SUNKEN;
+
 			if (reliable)
 			{
 				if (rez == MISS)
@@ -142,13 +148,12 @@ public class Opponent implements def
 					direction = UNDEF;
 					previous_shot[0] = future[0];
 					previous_shot[1] = future[1];
-					System.out.println("CHANGED!");
-				}
-				else
+					System.out.println("CHANGED because of dead!");
+				} else
 				{
 					previous_shot[0] = future[0];
 					previous_shot[1] = future[1];
-					System.out.println("CHANGED!");
+					System.out.println("CHANGED because of sunken");
 				}
 			} else
 			{
@@ -161,14 +166,17 @@ public class Opponent implements def
 					direction = UNDEF;
 					previous_shot[0] = future[0];
 					previous_shot[1] = future[1];
+					System.out.println("CHANGED because of dead instant");
 				} else
 				{
 					reliable = true;
 					previous_shot[0] = future[0];
 					previous_shot[1] = future[1];
+					System.out.println("CHANGED because of sunken instant");
 				}
 			}
-			return save(rez);
+			field.rep();
+			return regulate;
 		} else
 		{
 			int i = random.nextInt(EDGE);
@@ -181,6 +189,8 @@ public class Opponent implements def
 			previous_shot = new int[]{i, j};
 			direction = UNDEF;
 		}
+		field.rep();
+		int a = 0;
 		return save(field.hit(previous_shot));
 	}
 

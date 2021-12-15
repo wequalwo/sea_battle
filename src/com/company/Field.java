@@ -79,7 +79,13 @@ final class Field extends JFrame implements ActionListener, def
 		opponent = new Opponent(this);
 		show_info("Expand your fleet!");
 	}
-
+	protected void rep()
+	{
+		//this.setVisible(false);
+		my_board.repaint();;
+		this.repaint();
+		//this.setVisible(true);
+	}
 	private void disable_start_button()
 	{
 		start_button.setBackground(Color.black);

@@ -440,6 +440,7 @@ public class Set_of_ships implements def
 		}
 		clear();
 		create(ships_map);
+		counter = 10;
 	}
 
 	/**

@@ -3,6 +3,7 @@ package com.company;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Класс Opponents_board реализует графику и логику поля оппонента
@@ -52,8 +53,11 @@ public class Opponents_board extends Board
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		boolean search_status = true;
 		for (int i = 1; i < 11; i++)
 		{
+			if(!search_status)
+				break;
 			for (int j = 1; j < 11; j++)
 			{
 				if (e.getSource() == buttons[i][j])
@@ -77,7 +81,8 @@ public class Opponents_board extends Board
 						buttons[i][j].setBackground(Color.blue);
 						// TODO: раскомментировать, когда будет все сделано
 						// buttons[i][j].setEnabled(false);
-						while (opponent.force_move() != MISS) ; // до тех пор, пока соперник не промазал, он ходит
+
+						while (opponent.force_move() != MISS); // до тех пор, пока соперник не промазал, он ходит
 					} else if (grind.get(0)[0] == SUNKEN)// попал
 					{
 						buttons[i][j].setBackground(Color.orange);
@@ -100,6 +105,8 @@ public class Opponents_board extends Board
 							buttons[p[0]][p[1]].setEnabled(false);
 						}
 					}
+					search_status = false;
+					break;
 				}
 			}
 		}
@@ -107,6 +114,7 @@ public class Opponents_board extends Board
 		{
 			opponent.force_stop(observer.get_counter() == 0);
 		}
+		int a = 0;
 	}
 }
 

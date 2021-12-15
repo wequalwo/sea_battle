@@ -2,7 +2,7 @@ package com.company;
 /**
  * Морской бой <b>maker</b> и <b>price</b>.
  * @autor Серафим Иванов
- * @version 13.0
+ * @version 14.2
  */
 
 
