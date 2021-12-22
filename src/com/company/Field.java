@@ -160,6 +160,14 @@ final class Field extends JFrame implements ActionListener, def
 		else
 			System.exit(0);
 	}
+
+	/**
+	 * It pushes opponents move. In fact, this is one big crutch cause it breaks up encapsulation
+	 * I do not know how I should fix it, so let it be
+	 *
+	 * The main problem is delaying between moves. Without this func i can not do it
+	 * @throws InterruptedException some f*** errors
+	 */
 	public void move() throws InterruptedException
 	{
 		opponents_board.pause();
