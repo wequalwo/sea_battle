@@ -151,8 +151,8 @@ final class Field extends JFrame implements ActionListener, def
 			show_info("Game over. You won!");
 		} else
 		{
-			show_info("Game over. Your opponent won. Try again!");
 			Sound.playSound("sounds/tobe.wav").join();
+			show_info("Game over. Your opponent won. Try again!");
 		}
 		int input = JOptionPane.showConfirmDialog(null, "Do you want to play again?", "Exit frame", JOptionPane.YES_NO_OPTION);
 		// 0=yes, 1=no, 2=cancel
@@ -180,6 +180,10 @@ final class Field extends JFrame implements ActionListener, def
 			while (true)
 			{
 				int a = opponent.force_move();
+				if (my_board.game_status == false)
+				{
+					return;
+				}
 				if(a == MISS)
 				{
 					Sound.playSound("sounds/daladna.wav").join();

@@ -63,7 +63,6 @@ public class Main
 	public static void main(String[] args) throws InterruptedException
 	{
 		field = new Field();
-		field.over(true);
 		while(true)
 		{
 			Thread.sleep(10);

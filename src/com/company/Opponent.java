@@ -245,7 +245,6 @@ public class Opponent implements def
 	 */
 	protected void force_stop(boolean who)
 	{
-
 		field.over(who);
 	}
 }

@@ -106,7 +106,6 @@ public class Opponents_board extends Board
 						}*/
 						/*while (opponent.force_move() != MISS) ; // до тех пор, пока соперник не промазал, он ходит*/
 						f.convert();
-
 					} else if (grind.get(0)[0] == SUNKEN)// попал
 					{
 						buttons[i][j].setBackground(Color.orange);
