@@ -143,15 +143,16 @@ final class Field extends JFrame implements ActionListener, def
 		return rez;
 	}
 
-	protected void over(boolean who)
+	public void over(boolean who)
 	{
-		Sound.playSound("sounds/tobe.wav").join();
 		if (who == YOU)
 		{
+			Sound.playSound("sounds/lyapota.wav").join();
 			show_info("Game over. You won!");
 		} else
 		{
 			show_info("Game over. Your opponent won. Try again!");
+			Sound.playSound("sounds/tobe.wav").join();
 		}
 		int input = JOptionPane.showConfirmDialog(null, "Do you want to play again?", "Exit frame", JOptionPane.YES_NO_OPTION);
 		// 0=yes, 1=no, 2=cancel
