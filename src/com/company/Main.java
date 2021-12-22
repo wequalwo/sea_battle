@@ -4,7 +4,7 @@ package com.company;
  * Sea battle <b>maker</b> и <b>price</b>.
  *
  * @autor wequalwo aka Seraphim Ivanov
- * @version 16.3 eng commented
+ * @version 16.9 eng commented + memes
  */
 
 /**
