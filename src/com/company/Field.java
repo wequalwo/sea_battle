@@ -145,6 +145,7 @@ final class Field extends JFrame implements ActionListener, def
 
 	protected void over(boolean who)
 	{
+		Sound.playSound("tobe.wav").join();
 		if (who == YOU)
 		{
 			show_info("Game over. You won!");
@@ -180,7 +181,14 @@ final class Field extends JFrame implements ActionListener, def
 				Thread.sleep(700);
 				int a = opponent.force_move();
 				if(a == MISS)
+				{
+					Sound.playSound("sounds/daladna.wav").join();
 					break;
+				}
+				else if(a == DEAD)
+				{
+					Sound.playSound("sounds/povezlo-povezlo.wav").join();
+				}
 				System.out.println(a);
 			}
 		}

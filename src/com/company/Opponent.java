@@ -36,9 +36,14 @@ public class Opponent implements def
 	 */
 	private boolean reliable;         // надежность направлния
 
+	/**
+	 * Some weird music
+	 */
+	private Sound sound;
 	Opponent(Field field)
 	{
 		this.field = field;
+		//sound = new Sound("sounds/povezlo-povezlo.wav");
 		previous_shot = new int[]{0, 0};
 		random = new Random();
 		direction = UNDEF;

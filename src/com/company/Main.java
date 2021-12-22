@@ -60,7 +60,6 @@ class f
 public class Main
 {
 	static Field field;
-
 	public static void main(String[] args) throws InterruptedException
 	{
 		field = new Field();

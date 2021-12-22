@@ -127,6 +127,7 @@ public class Opponents_board extends Board
 							buttons[p[0]][p[1]].setBackground(Color.blue);
 							buttons[p[0]][p[1]].setEnabled(false);
 						}
+						Sound.playSound("sounds/povezlo-povezlo.wav").join();
 					}
 					search_status = false;
 					break;
