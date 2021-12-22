@@ -145,7 +145,7 @@ final class Field extends JFrame implements ActionListener, def
 
 	protected void over(boolean who)
 	{
-		Sound.playSound("tobe.wav").join();
+		Sound.playSound("sounds/tobe.wav").join();
 		if (who == YOU)
 		{
 			show_info("Game over. You won!");
