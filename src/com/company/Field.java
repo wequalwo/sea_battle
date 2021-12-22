@@ -21,6 +21,7 @@ final class Field extends JFrame implements ActionListener, def
 	private static final int button_space = 20;        //расстояние от верхней границы окна до кнопки "start" и текста
 	public static int space = 30;                      //расстоянием между панельями
 	public boolean game_status = true;
+	public boolean another_ko = false;
 	/**
 	 * Start game button
 	 */
@@ -76,6 +77,7 @@ final class Field extends JFrame implements ActionListener, def
 		this.add(my_board);
 		this.add(opponents_board);
 		this.setVisible(true);
+
 		opponent = new Opponent(this);
 		show_info("Expand your fleet!");
 	}
@@ -130,6 +132,7 @@ final class Field extends JFrame implements ActionListener, def
 	 */
 	public int hit(int[] pos)
 	{
+		System.out.println("hit reached!");
 		int rez = my_board.hit(pos);
 		if (rez == it_is_the_end)
 		{
@@ -156,5 +159,24 @@ final class Field extends JFrame implements ActionListener, def
 			Main.reset();
 		else
 			System.exit(0);
+	}
+	public void move() throws InterruptedException
+	{
+		opponents_board.pause();
+		if(opponent == null)
+			System.out.println("Error 2");
+		else
+		{
+			while (true)
+			{
+				Thread.sleep(700);
+				int a = opponent.force_move();
+				if(a == MISS)
+					break;
+				System.out.println(a);
+			}
+		}
+		f.convert();
+		opponents_board.pause();
 	}
 }

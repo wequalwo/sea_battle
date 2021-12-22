@@ -13,7 +13,7 @@ public class Opponent implements def
 	/**
 	 * field, witch contains this class
 	 */
-	private final Field field;        // поле, на котором происходит действие (для координации между классами)
+	protected final Field field;        // поле, на котором происходит действие (для координации между классами)
 	/**
 	 * it keeps previous shot coordinates
 	 */
@@ -114,6 +114,18 @@ public class Opponent implements def
 					future[1]++;
 
 				if (b(future))
+				{
+					if (reliable)
+					{
+						direction = (direction + 2) % 4;
+					} else
+					{
+						direction = (direction + 1) % 4;
+					}
+					future[0] = previous_shot[0];
+					future[1] = previous_shot[1];
+				}
+				if(map[future[0]][future[1]] == MISS)
 				{
 					if (reliable)
 					{

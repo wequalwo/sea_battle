@@ -13,6 +13,7 @@ package com.company;
 interface def
 {
 
+
 	int DELTA = 1;            // смещение массива - считать с нуля, а не с единицы (из-за окаймления поля)
 	int MISS = -1;            // статус - мимо
 	int DEAD = -2;            // статус - судно затоплено
@@ -40,7 +41,19 @@ interface def
 
 	int UNDEF = -8;
 }
-
+class f
+{
+	private static boolean another_ko = false;
+	static boolean setAnother_ko()
+	{
+		return another_ko;
+	}
+	static void convert()
+	{
+		System.out.println("converted to " + !another_ko);
+		another_ko = !another_ko;
+	}
+}
 /**
  * Program entry point.
  */
@@ -48,9 +61,19 @@ public class Main
 {
 	static Field field;
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws InterruptedException
 	{
 		field = new Field();
+
+		while(true)
+		{
+			Thread.sleep(10);
+			if(f.setAnother_ko())
+			{
+				//System.out.println("yep");
+				field.move();
+			}
+		}
 	}
 
 	/**

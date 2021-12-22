@@ -12,12 +12,12 @@ public class Opponents_board extends Board
 	/**
 	 * status of the game
 	 */
+	protected boolean status;
 	public boolean game_status;
 	/**
 	 * observer of the board
 	 */
 	private Op_observer observer;
-
 	@Override
 	protected boolean get_status()
 	{
@@ -49,9 +49,21 @@ public class Opponents_board extends Board
 				buttons[i][j].setEnabled(true);
 			}
 		}
+		status = true;
 		return true;
 	}
 
+	protected void pause()
+	{
+		status = !status;
+		for (int i = 1; i < 11; i++)
+		{
+			for (int j = 1; j < 11; j++)
+			{
+				buttons[i][j].setEnabled(status);
+			}
+		}
+	}
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public void actionPerformed(ActionEvent e)
@@ -84,7 +96,16 @@ public class Opponents_board extends Board
 						buttons[i][j].setBackground(Color.blue);
 						buttons[i][j].setEnabled(false);
 
-						while (opponent.force_move() != MISS) ; // до тех пор, пока соперник не промазал, он ходит
+						/*try
+						{
+							opponent.field.move();
+						} catch (InterruptedException interruptedException)
+						{
+							interruptedException.printStackTrace();
+						}*/
+						/*while (opponent.force_move() != MISS) ; // до тех пор, пока соперник не промазал, он ходит*/
+						f.convert();
+
 					} else if (grind.get(0)[0] == SUNKEN)// попал
 					{
 						buttons[i][j].setBackground(Color.orange);
