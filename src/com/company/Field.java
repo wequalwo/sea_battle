@@ -178,7 +178,6 @@ final class Field extends JFrame implements ActionListener, def
 		{
 			while (true)
 			{
-				Thread.sleep(700);
 				int a = opponent.force_move();
 				if(a == MISS)
 				{
@@ -188,6 +187,10 @@ final class Field extends JFrame implements ActionListener, def
 				else if(a == DEAD)
 				{
 					Sound.playSound("sounds/povezlo-povezlo.wav").join();
+				}
+				else
+				{
+					Thread.sleep(700);
 				}
 				System.out.println(a);
 			}

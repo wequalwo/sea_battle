@@ -112,6 +112,7 @@ public class Opponents_board extends Board
 						buttons[i][j].setEnabled(false);
 					} else // ответ (выстрел) убил
 					{
+						Sound.playSound("sounds/vo-krasavchik.wav").join();
 						for (int[] p : grind)
 						{
 							buttons[p[0]][p[1]].setBackground(Color.gray);
