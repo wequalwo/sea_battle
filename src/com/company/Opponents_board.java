@@ -93,6 +93,7 @@ public class Opponents_board extends Board
 
 					if (grind.get(0)[0] == MISS) // выстрел мимо
 					{
+						Sound.playSound("sounds/ne-probil.wav").join();
 						buttons[i][j].setBackground(Color.blue);
 						buttons[i][j].setEnabled(false);
 
